@@ -14,13 +14,34 @@
         <Label Content="Высота" HorizontalAlignment="Left" Margin="7,74,0,0" VerticalAlignment="Top"/>
         <TextBox Name="PumpWidth" HorizontalAlignment="Left" Height="22" Margin="64,52,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120"/>
         <TextBox Name="PumpHeight" HorizontalAlignment="Left" Height="22" Margin="65,78,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120"/>
-        <Button Name="Build" Content="Button" HorizontalAlignment="Left" Margin="54,383,0,0" VerticalAlignment="Top" Width="75" Click="Build_Click"/>
-        <TextBox Name="TestString" HorizontalAlignment="Left" Height="24" Margin="53,346,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+        <Button Name="Build" Content="Разместить" HorizontalAlignment="Left" Margin="54,383,0,0" VerticalAlignment="Top" Width="75" Click="Build_Click"/>
         <Label Content="Расположение патрубков" HorizontalAlignment="Left" Margin="208,-2,0,0" VerticalAlignment="Top" FontSize="14"/>
         <Label Content="Всас" HorizontalAlignment="Left" Margin="207,25,0,0" VerticalAlignment="Top"/>
-        <TextBox Name="NozzleInputDir" HorizontalAlignment="Left" Height="23" Margin="260,28,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
         <Label Content="Выкид" HorizontalAlignment="Left" Margin="208,65,0,0" VerticalAlignment="Top"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="261,69,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
 
+        <ComboBox Name="NozzleInputDir" HorizontalAlignment="Left" Margin="256,29,0,0" VerticalAlignment="Top" Width="120"/>
+        <ComboBox Name="NozzleOutputDir" HorizontalAlignment="Left" Margin="260,69,0,0" VerticalAlignment="Top" Width="114"/>
+        <Label Content="Тип двигателя" HorizontalAlignment="Left" Margin="8,109,0,0" VerticalAlignment="Top"/>
+        <ComboBox Name="EngineType" HorizontalAlignment="Left" Margin="110,112,0,0" VerticalAlignment="Top" Width="120"/>
+        <CheckBox Name="MSS" Content="МСС с ПЧ" HorizontalAlignment="Left" Margin="9,170,0,0" VerticalAlignment="Top"/>
+        <CheckBox x:Name="SHUN" Content="ШУН (с ПЛК)" HorizontalAlignment="Left" Margin="89,170,0,0" VerticalAlignment="Top"/>
+        <CheckBox x:Name="VRU" Content="ВРУ" HorizontalAlignment="Left" Margin="186,170,0,0" VerticalAlignment="Top"/>
+        <CheckBox x:Name="SHSN" Content="ШСН" HorizontalAlignment="Left" Margin="230,170,0,0" VerticalAlignment="Top"/>
+        <CheckBox x:Name="TSN" Content="ТСН" HorizontalAlignment="Left" Margin="283,170,0,0" VerticalAlignment="Top"/>
+        <CheckBox x:Name="OPS" Content="ОПС" HorizontalAlignment="Left" Margin="332,170,0,0" VerticalAlignment="Top"/>
+        <Label Content="Шкафы электрооборудования" HorizontalAlignment="Left" Margin="6,141,0,0" VerticalAlignment="Top"/>
+        <CheckBox x:Name="OVVO" Content="Отсек высоковольтного оборудования" HorizontalAlignment="Left" Margin="12,206,0,0" VerticalAlignment="Top"/>
+        <CheckBox x:Name="Vent" Content="Вентиляция" HorizontalAlignment="Left" Margin="15,230,0,0" VerticalAlignment="Top"/>
+        <CheckBox x:Name="Heat" Content="Отопление" HorizontalAlignment="Left" Margin="118,230,0,0" VerticalAlignment="Top"/>
+        <CheckBox x:Name="Cond" Content="Кондиционирование" HorizontalAlignment="Left" Margin="217,230,0,0" VerticalAlignment="Top"/>
+        <Label Content="Запорно-регулирующая арматура" HorizontalAlignment="Left" Margin="10,252,0,0" VerticalAlignment="Top"/>
+        <CheckBox x:Name="VEP" Content="На всасе с э/приводом" HorizontalAlignment="Left" Margin="5,277,0,0" VerticalAlignment="Top"/>
+        <CheckBox x:Name="NEPP" Content="На нагнетании с э/приводом и позиционером" HorizontalAlignment="Left" Margin="157,277,0,0" VerticalAlignment="Top"/>
+        <CheckBox x:Name="NPSN" Content="На патрубке слива напорной магистрали с э/приводом" HorizontalAlignment="Left" Margin="5,293,0,0" VerticalAlignment="Top"/>
+        <CheckBox x:Name="OKSD" Content="Обратный клапан с демфером" HorizontalAlignment="Left" Margin="5,307,0,0" VerticalAlignment="Top"/>
+        
+        <Label Content="КИП" HorizontalAlignment="Left" Margin="10,321,0,0" VerticalAlignment="Top"/>
+        <CheckBox x:Name="DDNV" Content="Датчик давления на всасе" HorizontalAlignment="Left" Margin="5,347,0,0" VerticalAlignment="Top"/>
+        
     </Grid>
 </Window>
