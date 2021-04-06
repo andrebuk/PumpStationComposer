@@ -17,6 +17,7 @@ namespace PumpStationComposer
         {
             Document document = commandData.Application.ActiveUIDocument.Document;
             PumpConfigurator pc = new PumpConfigurator(document);
+
             pc.ShowDialog();
             return Result.Succeeded;
 
