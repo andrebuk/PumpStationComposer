@@ -23,12 +23,12 @@ namespace PumpStationComposer
     public partial class PumpConfigurator : Window
     {
         public Document document;
-        public Dictionary<string, bool> PumpStationOptions=new Dictionary<string, bool>(20);
+        public Dictionary<string, bool> PumpStationOptions = new Dictionary<string, bool>(20);
         public Dictionary<string, int> PumpDimensions = new Dictionary<string, int>(3);
         public Dictionary<string, int> PumpNozzle = new Dictionary<string, int>(2);
-   
-        public Dictionary<string, string> PumpEngine = new Dictionary<string, string>(1);
 
+        public Dictionary<string, string> PumpEngine = new Dictionary<string, string>(1);
+        public XYZ testPoint = new XYZ();
         public PumpConfigurator(Document doc)
         {
             document = doc;
@@ -37,62 +37,30 @@ namespace PumpStationComposer
 
         private void Build_Click(object sender, RoutedEventArgs e)
         {
-            //String ts = "Шкаф";
-            //SMFamily test = new SMFamily(document);
-            //FamilySymbol testFS = test.IsExist(ts,document);
-            //if (testFS!=null)
-            //{
-            //    using(Transaction t = new Transaction(document, "Создание объектов насосной станции"))
-            //    {
-            //        t.Start();
-            //        bool value = false;
-            //        if (PumpStationOptions.TryGetValue("Шкаф МСС", out value) == true)
-            //        {
-            //            FamilyInstance instance = document.Create.NewFamilyInstance(new XYZ(0, 0, 0), testFS, Autodesk.Revit.DB.Structure.StructuralType.NonStructural);
-            //        }
+            testPoint = testPoint + new XYZ(100, 0, 0);
 
-            //        t.Commit();
-
-            //    }
-            //}
-            bool testvalue = false;
-            if (PumpStationOptions.TryGetValue("Шкаф МСС", out testvalue) == true)
-            {
-                this.TestZone.Text = "Рисуем шкаф МСС";
-            }
-            else 
-            {
-                this.TestZone.Text = "Не рисуем шкаф МСС";
-            }
-            
-            
-  
+            PumpStation PST = new PumpStation();
+            PST.startPoint = testPoint;
+            PST.document = document;
+            PST.PumpStationOptions = PumpStationOptions;
+            PST.Create();
         }
 
         private void MSS_Checked(object sender, RoutedEventArgs e)
         {
 
+            //MessageBox.Show("Draw");
+            PumpStationOptions.Remove("Шкаф МСС");
+            PumpStationOptions.Add("Шкаф МСС", true);
 
-
-            //if (this.MSS.IsChecked==true)
-            //{
-            MessageBox.Show("Draw");
-            //PumpStationOptions.Remove("Шкаф МСС");
-            //PumpStationOptions.Add("Шкаф МСС", true);
-            //}
         }
 
         private void MSS_Unchecked(object sender, RoutedEventArgs e)
         {
+            //MessageBox.Show("Do not Draw");
+            PumpStationOptions.Remove("Шкаф МСС");
+            PumpStationOptions.Add("Шкаф МСС", false);
 
-
-
-            //if (this.MSS.IsChecked==true)
-            //{
-            MessageBox.Show("Do not Draw");
-            //PumpStationOptions.Remove("Шкаф МСС");
-            //PumpStationOptions.Add("Шкаф МСС", true);
-            //}
         }
     }
 }
