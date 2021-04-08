@@ -12,44 +12,49 @@ namespace PumpStationComposer
     {
         public Document document;
         public Dictionary<string, bool> PumpStationOptions;
-        public Dictionary<string, int> PumpDimensions;
+        public Dictionary<string, double> PumpDimensions;
         public Dictionary<string, int> PumpNozzle;
         public XYZ startPoint;
 
         public void Create()
         {
-            PumpStationOptions.TryGetValue("Шкаф МСС", out bool value);
-            if (value)
+            XYZ deltaXYZ = startPoint;
+            List<string> boxTypes = new List<string> { "МСС с ПЧ", "ШУН (с ПЛК)", "ВРУ","ШСН","ТСН","ОПС" };
+            foreach (string currentBoxType in boxTypes)
             {
-                SMFamily mss = new SMFamily(document);
-                mss.insertPoint = startPoint;
-                mss.familyTypeName = "Шкаф";
-                mss.insert();
-                mss.setParameterValue("ADSK_Наименование", "Шкаф МСС");
+                PumpStationOptions.TryGetValue(currentBoxType, out bool value);
+                if (value)
+                {
+                    SMFamily mss = new SMFamily(document);
+                    mss.insertPoint = deltaXYZ;
+                    mss.familyTypeName = "Шкаф";
+                    mss.insert();
+                    string boxesTypeToParameter = "Шкаф " + currentBoxType;
+                    mss.setStringParameterValue("ADSK_Наименование", boxesTypeToParameter);
+
+                    deltaXYZ = deltaXYZ + new XYZ(0, 600 / 304.8, 0);
+
+                }
+
             }
-            //String ts = "Шкаф";
-            //SMFamily test = new SMFamily(document);
-            //FamilySymbol testFS = test.IsExist(ts, document);
-            //if (testFS != null)
-            //{
-            //    using (Transaction t = new Transaction(document, "Создание объектов насосной станции"))
-            //    {
-
-            //        PumpStationOptions.TryGetValue("Шкаф МСС", out bool value);
-            //        if (value)
-            //        {
-            //            t.Start();
-            //            FamilyInstance instance = document.Create.NewFamilyInstance(new XYZ(0, 0, 0), testFS, Autodesk.Revit.DB.Structure.StructuralType.NonStructural);
-            //            Element el = instance as Element;
-
-            //            el.LookupParameter("ADSK_Наименование").Set("Шкаф МСС");
-            //            t.Commit();
-            //        }
+            //вернем точку на край последнего шкафа
+            PumpDimensions.TryGetValue("Длина", out double pumpLength);
+            PumpDimensions.TryGetValue("Ширина", out double pumpWidth);
+            PumpDimensions.TryGetValue("Высота", out double pumpHeight);
+            deltaXYZ = deltaXYZ  + new XYZ(0, pumpLength / 304.8/2, 0);
+            //разместим двигатель
+            SMFamily pump = new SMFamily(document);
+            pump.insertPoint = deltaXYZ;
+            pump.familyTypeName = "Насос с двигателем";
+            pump.insert();
+            string pumpDescription = "Насос ";
+            pump.setStringParameterValue("ADSK_Наименование",pumpDescription);
+            pump.setDoubleParameterValue("Насос длина", pumpLength/304.8);
+            pump.setDoubleParameterValue("Насос ширина", pumpWidth / 304.8);
+            pump.setDoubleParameterValue("Насос высота", pumpHeight/304.8);
 
 
-            //    }
-            //}
         }
-        
+
     }
 }

@@ -8,12 +8,12 @@
              d:DesignHeight="606" Width="500">
     <Grid Margin="0,0,0,0">
         <Label Content="Габариты двигателя" HorizontalAlignment="Left" Margin="3,-4,0,0" VerticalAlignment="Top" FontSize="14"/>
-        <TextBox Name="PumpLength" HorizontalAlignment="Left" Height="22" Margin="65,27,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120" />
+        <TextBox Name="PumpLength" HorizontalAlignment="Left" Height="22" Margin="65,27,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120" Text="1500" TextChanged="PumpLength_TextChanged" />
         <Label Content="Длина" HorizontalAlignment="Left" Margin="7,24,0,0" VerticalAlignment="Top" Height="26"/>
         <Label Content="Ширина" HorizontalAlignment="Left" Margin="7,50,0,0" VerticalAlignment="Top" Height="26"/>
         <Label Content="Высота" HorizontalAlignment="Left" Margin="7,74,0,0" VerticalAlignment="Top"/>
-        <TextBox Name="PumpWidth" HorizontalAlignment="Left" Height="22" Margin="65,52,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120"/>
-        <TextBox Name="PumpHeight" HorizontalAlignment="Left" Height="22" Margin="65,78,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120"/>
+        <TextBox Name="PumpWidth" HorizontalAlignment="Left" Height="22" Margin="65,52,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120"  Text="1500" TextChanged="PumpWidth_TextChanged"/>
+        <TextBox Name="PumpHeight" HorizontalAlignment="Left" Height="22" Margin="65,78,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120"  Text="1500" TextChanged="PumpHeight_TextChanged"/>
         <Button Name="Build" Content="Разместить" HorizontalAlignment="Left" Margin="35,487,0,0" VerticalAlignment="Top" Width="75" Click="Build_Click"/>
         <Label Content="Расположение патрубков" HorizontalAlignment="Left" Margin="208,-2,0,0" VerticalAlignment="Top" FontSize="14"/>
         <Label Content="Всас" HorizontalAlignment="Left" Margin="208,25,0,0" VerticalAlignment="Top"/>
@@ -40,11 +40,11 @@
 
 
         <CheckBox Name="MSS" Content="МСС с ПЧ" HorizontalAlignment="Left" Margin="5,170,0,0" VerticalAlignment="Top" Checked="MSS_Checked" Unchecked="MSS_Unchecked"/>
-        <CheckBox x:Name="SHUN" Content="ШУН (с ПЛК)" HorizontalAlignment="Left" Margin="89,170,0,0" VerticalAlignment="Top"/>
-        <CheckBox x:Name="VRU" Content="ВРУ" HorizontalAlignment="Left" Margin="186,170,0,0" VerticalAlignment="Top"/>
-        <CheckBox x:Name="SHSN" Content="ШСН" HorizontalAlignment="Left" Margin="230,170,0,0" VerticalAlignment="Top"/>
-        <CheckBox x:Name="TSN" Content="ТСН" HorizontalAlignment="Left" Margin="283,170,0,0" VerticalAlignment="Top"/>
-        <CheckBox x:Name="OPS" Content="ОПС" HorizontalAlignment="Left" Margin="332,170,0,0" VerticalAlignment="Top"/>
+        <CheckBox x:Name="SHUN" Content="ШУН (с ПЛК)" HorizontalAlignment="Left" Margin="89,170,0,0" VerticalAlignment="Top" Checked="SHUN_Checked" Unchecked="SHUN_Unchecked"/>
+        <CheckBox x:Name="VRU" Content="ВРУ" HorizontalAlignment="Left" Margin="186,170,0,0" VerticalAlignment="Top" Checked="VRU_Checked" Unchecked="VRU_Unchecked"/>
+        <CheckBox x:Name="SHSN" Content="ШСН" HorizontalAlignment="Left" Margin="230,170,0,0" VerticalAlignment="Top" Checked="SHSN_Checked" Unchecked="SHSN_Unchecked"/>
+        <CheckBox x:Name="TSN" Content="ТСН" HorizontalAlignment="Left" Margin="283,170,0,0" VerticalAlignment="Top" Checked="TSN_Checked" Unchecked="TSN_Unchecked"/>
+        <CheckBox x:Name="OPS" Content="ОПС" HorizontalAlignment="Left" Margin="332,170,0,0" VerticalAlignment="Top" Checked="OPS_Checked" Unchecked="OPS_Unchecked"/>
         <Label Content="Шкафы электрооборудования" HorizontalAlignment="Left" Margin="10,141,0,0" VerticalAlignment="Top"/>
         <CheckBox x:Name="OVVO" Content="Отсек высоковольтного оборудования" HorizontalAlignment="Left" Margin="5,206,0,0" VerticalAlignment="Top"/>
         <CheckBox x:Name="Vent" Content="Вентиляция" HorizontalAlignment="Left" Margin="5,230,0,0" VerticalAlignment="Top"/>
@@ -65,7 +65,9 @@
         <CheckBox x:Name="Pipe" Content="Трубопровод на всасе 5м" HorizontalAlignment="Left" Margin="5,433,0,0" VerticalAlignment="Top"/>
         <CheckBox x:Name="Flow" Content="Плавающий водозаборный оголовок" HorizontalAlignment="Left" Margin="5,450,0,0" VerticalAlignment="Top"/>
         <CheckBox x:Name="SDP" Content="Стрела для подъема всасывающей трубы" HorizontalAlignment="Left" Margin="5,467,0,0" VerticalAlignment="Top"/>
-        <TextBlock Name="TestZone" HorizontalAlignment="Left" Margin="24,532,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="37" Width="342"/>
+        <Button x:Name="Clear" Content="Удалить" HorizontalAlignment="Left" Margin="135,487,0,0" VerticalAlignment="Top" Width="75" Click="Clear_Click"/>
+        <Button x:Name="DrawBound" Content="Границы" HorizontalAlignment="Left" Margin="233,488,0,0" VerticalAlignment="Top" Width="75" Click="DrawBound_Click"/>
+        <Button x:Name="Test" Content="Тест" HorizontalAlignment="Left" Margin="337,487,0,0" VerticalAlignment="Top" Width="75" Click="Test_Click"/>
 
 
 

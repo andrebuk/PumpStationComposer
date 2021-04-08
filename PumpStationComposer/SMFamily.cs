@@ -50,17 +50,23 @@ namespace PumpStationComposer
                     FamilyInstance instance = document.Create.NewFamilyInstance(insertPoint, testFS, Autodesk.Revit.DB.Structure.StructuralType.NonStructural);
                     element = instance as Element;
                     t.Commit();
-                    //return element;
-                    //el.LookupParameter("ADSK_Наименование").Set("Шкаф МСС");
 
                 }
             }
-            //else
-            //{
-            //    return null;
-            //}
+
         }
-        public void setParameterValue(string parameterName, string parameterValue)
+        public void setStringParameterValue(string parameterName, string parameterValue)
+        {
+            string transactionName = "Назначение параметра " + parameterName;
+            using (Transaction t = new Transaction(document, transactionName))
+            {
+                t.Start();
+                element.LookupParameter(parameterName).Set(parameterValue);
+                t.Commit();
+            }
+
+        }
+        public void setDoubleParameterValue(string parameterName, double parameterValue)
         {
             string transactionName = "Назначение параметра " + parameterName;
             using (Transaction t = new Transaction(document, transactionName))
