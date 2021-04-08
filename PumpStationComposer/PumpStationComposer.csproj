@@ -53,6 +53,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="FamilyInstanceInsert.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -70,6 +71,10 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="PumpSationComposer.addin" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Resources\PumpStationComposer.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

@@ -46,24 +46,38 @@ namespace PumpStationComposer
             using (Transaction t = new Transaction(document, "Удаление всех объектов"))
             {
                 t.Start();
+
                 document.Delete(allElementIDs);
+
+
                 t.Commit();
+
+
+
             }
         }
 
         private void DrawBound_Click(object sender, RoutedEventArgs e)
         {
-
+            double deltaForWalls = 150.0 / 304.8;
             //Удалим все линии
             FilteredElementCollector LinesCollector = new FilteredElementCollector(document);
-            List<ElementId> Lines = (List<ElementId>)LinesCollector.OfCategory(BuiltInCategory.OST_Lines).ToElementIds();
+            List<ElementId> Lines = (List<ElementId>)LinesCollector.OfCategory(BuiltInCategory.OST_Walls).ToElementIds();
             using (Transaction t = new Transaction(document, "Удаляем прежние структурные линии"))
             {
                 t.Start();
 
                 foreach (ElementId currentLine in Lines)
                 {
-                    document.Delete(currentLine);
+                    try
+                    {
+                        document.Delete(currentLine);
+                    }
+                    catch (Exception)
+                    {                       
+                    }
+                    
+
                 }
                 t.Commit();
             }
@@ -83,34 +97,50 @@ namespace PumpStationComposer
                 minXs.Add(currentBB.Min.X);
                 minYs.Add(currentBB.Min.Y);
             }
-            double maxX = maxXs.Max();
-            double maxY = maxYs.Max();
-            double minX = minXs.Min();
-            double minY = minYs.Min();
+            double maxX = maxXs.Max() + deltaForWalls;
+            double maxY = maxYs.Max() + deltaForWalls;
+            double minX = minXs.Min() - deltaForWalls;
+            double minY = minYs.Min() - deltaForWalls;
 
             XYZ point1 = new XYZ(minX, minY, 0);
             XYZ point2 = new XYZ(minX, maxY, 0);
             XYZ point3 = new XYZ(maxX, maxY, 0);
             XYZ point4 = new XYZ(maxX, minY, 0);
-            //IList<Curve> curveLoop = new List<Curve>();
-            //curveLoop.Add(Autodesk.Revit.DB.Line.CreateBound(point1, point2));
-            //curveLoop.Add(Autodesk.Revit.DB.Line.CreateBound(point2, point3));
-            //curveLoop.Add(Autodesk.Revit.DB.Line.CreateBound(point3, point4));
-            //curveLoop.Add(Autodesk.Revit.DB.Line.CreateBound(point4, point1));
+            IList<Curve> curveLoop = new List<Curve>();
+            curveLoop.Add(Autodesk.Revit.DB.Line.CreateBound(point1, point2));
+            curveLoop.Add(Autodesk.Revit.DB.Line.CreateBound(point2, point3));
+            curveLoop.Add(Autodesk.Revit.DB.Line.CreateBound(point3, point4));
+            curveLoop.Add(Autodesk.Revit.DB.Line.CreateBound(point4, point1));
 
-            using (Transaction t = new Transaction(document, "Создем стены"))
+            //using (Transaction t = new Transaction(document, "Создем линии для стен"))
+            //{
+            //    t.Start();
+
+            //    //Wall wall = Wall.Create(document, curveLoop, false);
+
+            //    document.Create.NewDetailCurve(document.ActiveView, Autodesk.Revit.DB.Line.CreateBound(point1, point2));
+            //    document.Create.NewDetailCurve(document.ActiveView, Autodesk.Revit.DB.Line.CreateBound(point2, point3));
+            //    document.Create.NewDetailCurve(document.ActiveView, Autodesk.Revit.DB.Line.CreateBound(point3, point4));
+            //    document.Create.NewDetailCurve(document.ActiveView, Autodesk.Revit.DB.Line.CreateBound(point4, point1));
+            //    t.Commit();
+
+            //}
+
+            using (Transaction t = new Transaction(document, "Пытаемся создать стены"))
             {
                 t.Start();
+                Level levelElement = document.ActiveView.GenLevel;
+                ElementId leveId = levelElement.Id;
+                foreach (Curve item in curveLoop)
+                {
+                    //ElementId currentId = item.Id;
+                    Wall.Create(document, item, leveId, true);
+                }
 
-                //Wall wall = Wall.Create(document, curveLoop, false);
-
-                document.Create.NewDetailCurve(document.ActiveView, Autodesk.Revit.DB.Line.CreateBound(point1, point2));
-                document.Create.NewDetailCurve(document.ActiveView, Autodesk.Revit.DB.Line.CreateBound(point2, point3));
-                document.Create.NewDetailCurve(document.ActiveView, Autodesk.Revit.DB.Line.CreateBound(point3, point4));
-                document.Create.NewDetailCurve(document.ActiveView, Autodesk.Revit.DB.Line.CreateBound(point4, point1));
                 t.Commit();
 
             }
+
 
 
 
