@@ -19,29 +19,35 @@ namespace PumpStationComposer
         {
             document = doc;
         }
-        public FamilySymbol IsExist(string familyTypeName, Document document)
+        public FamilySymbol IsExist(string familyTypeName)
         {
             FilteredElementCollector collector = new FilteredElementCollector(document);
-            ICollection<Element> collection = collector.WhereElementIsNotElementType().ToElements();
+            ICollection<Element> collection = collector.WhereElementIsElementType().ToElements();
             List<FamilySymbol> allFamilySymbols = new FilteredElementCollector(document)
                 .OfClass(typeof(FamilySymbol))
                 .Cast<FamilySymbol>().ToList();
+            List<string> allNames = new List<string>();
+
             FamilySymbol result = null;
             foreach (var currentFamilySymbol in allFamilySymbols)
             {
+                allNames.Add(currentFamilySymbol.Name);
+
                 if (currentFamilySymbol.Name == familyTypeName)
                 {
                     result = currentFamilySymbol;
+                    break;
                 }
             }
 
+            allNames.Sort();
             return result;
         }
 
         public void insert()
         {
             SMFamily test = new SMFamily(document);
-            FamilySymbol testFS = test.IsExist(familyTypeName, document);
+            FamilySymbol testFS = test.IsExist(familyTypeName);
             if (testFS != null)
             {
                 using (Transaction t = new Transaction(document, "Создание объектов насосной станции"))
@@ -60,9 +66,12 @@ namespace PumpStationComposer
             string transactionName = "Назначение параметра " + parameterName;
             using (Transaction t = new Transaction(document, transactionName))
             {
-                t.Start();
-                element.LookupParameter(parameterName).Set(parameterValue);
-                t.Commit();
+                if (element != null)
+                {
+                    t.Start();
+                    element.LookupParameter(parameterName).Set(parameterValue);
+                    t.Commit();
+                }
             }
 
         }
@@ -71,9 +80,12 @@ namespace PumpStationComposer
             string transactionName = "Назначение параметра " + parameterName;
             using (Transaction t = new Transaction(document, transactionName))
             {
-                t.Start();
-                element.LookupParameter(parameterName).Set(parameterValue);
-                t.Commit();
+                if (element != null)
+                {
+                    t.Start();
+                    element.LookupParameter(parameterName).Set(parameterValue);
+                    t.Commit();
+                }
             }
 
         }
