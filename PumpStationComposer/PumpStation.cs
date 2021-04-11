@@ -26,6 +26,7 @@ namespace PumpStationComposer
         public string PlatformName = "Опорная конструкция";
         //Параметры элемента для создания стен и перегородок
         public string WallElementName = "Перегородка";
+        public string RoofName = "Крыша";
         public double WallElementWidth = 60.0;
         public double WallElementLength = 211.0;
 
@@ -83,138 +84,30 @@ namespace PumpStationComposer
             //добавим платформу
             //Опорная конструкция
             SMFamily platform = new SMFamily(document);
-            platform.insertPoint = pumpStationPoint1 + new XYZ(0.5 * (pumpStationPoint3.X - pumpStationPoint1.X), 0.5 * (pumpStationPoint3.Y - pumpStationPoint1.Y), 0);
+            platform.insertPoint = pumpStationPoint1 + new XYZ(0.5 * (pumpStationPoint3.X - pumpStationPoint1.X), 0.5 * (pumpStationPoint3.Y - pumpStationPoint1.Y), 0);//внимание тесто
             platform.familyTypeName = PlatformName;
             platform.insert();
-
             platform.setDoubleParameterValue("Длина", pumpStationPoint3.Y - pumpStationPoint1.Y);
-            platform.setDoubleParameterValue("Шиирина", pumpStationPoint3.X - pumpStationPoint1.X);
+            platform.setDoubleParameterValue("Шиирина", pumpStationPoint3.X - pumpStationPoint1.X);         
 
-
-            //-----
-
-            /*
-            double deltaForWalls = 150.0 / 304.8;
-            //Удалим все линии
-            FilteredElementCollector LinesCollector = new FilteredElementCollector(document);
-            List<ElementId> Lines = (List<ElementId>)LinesCollector.OfCategory(BuiltInCategory.OST_Walls).ToElementIds();
-            using (Transaction t = new Transaction(document, "Удаляем прежние структурные линии"))
-            {
-                t.Start();
-
-                foreach (ElementId currentLine in Lines)
-                {
-                    try
-                    {
-                        document.Delete(currentLine);
-                    }
-                    catch (Exception)
-                    {
-                    }
-
-
-                }
-                t.Commit();
-            }
-
-            List<double> maxXs = new List<double>();
-            List<double> maxYs = new List<double>();
-            List<double> minXs = new List<double>();
-            List<double> minYs = new List<double>();
-
-            FilteredElementCollector allElements = new FilteredElementCollector(document);
-            IList<Element> allElementID = allElements.OfCategory(BuiltInCategory.OST_MechanicalEquipment).WhereElementIsNotElementType().ToElements();
-            foreach (Element item in allElementID)
-            {
-                BoundingBoxXYZ currentBB = item.get_BoundingBox(document.ActiveView);
-                maxXs.Add(currentBB.Max.X);
-                maxYs.Add(currentBB.Max.Y);
-                minXs.Add(currentBB.Min.X);
-                minYs.Add(currentBB.Min.Y);
-            }
-            double maxX = maxXs.Max() + deltaForWalls;
-            double maxY = maxYs.Max() + deltaForWalls;
-            double minX = minXs.Min() - deltaForWalls;
-            double minY = minYs.Min() - deltaForWalls;
-
-            XYZ point1 = new XYZ(minX, minY, 0);
-            XYZ point2 = new XYZ(minX, maxY, 0);
-            XYZ point3 = new XYZ(maxX, maxY, 0);
-            XYZ point4 = new XYZ(maxX, minY, 0);
-            IList<Curve> curveLoop = new List<Curve>();
-            curveLoop.Add(Autodesk.Revit.DB.Line.CreateBound(point1, point2));
-            curveLoop.Add(Autodesk.Revit.DB.Line.CreateBound(point2, point3));
-            curveLoop.Add(Autodesk.Revit.DB.Line.CreateBound(point3, point4));
-            curveLoop.Add(Autodesk.Revit.DB.Line.CreateBound(point4, point1));
-
-            using (Transaction t = new Transaction(document, "Пытаемся создать стены"))
-            {
-                t.Start();
-                Level levelElement = document.ActiveView.GenLevel;
-                ElementId leveId = levelElement.Id;
-                foreach (Curve item in curveLoop)
-                {
-                    //ElementId currentId = item.Id;
-                    Wall.Create(document, item, leveId, true);
-                }
-
-                t.Commit();
-
-            }
-            */
+        }
+        public void DrawRoof()
+        {
+            //this.CalcDimensions();
+            //добавим платформу
+            //Опорная конструкция
+            SMFamily roof = new SMFamily(document);
+            roof.insertPoint = pumpStationPoint1 + new XYZ(0.5 * (pumpStationPoint3.X - pumpStationPoint1.X), 0.5 * (pumpStationPoint3.Y - pumpStationPoint1.Y), PumpStationHeight/304.0);
+            roof.familyTypeName = RoofName;
+            roof.insert();
+            roof.setDoubleParameterValue("Длина", pumpStationPoint3.Y - pumpStationPoint1.Y);
+            roof.setDoubleParameterValue("Шиирина", pumpStationPoint3.X - pumpStationPoint1.X);
 
         }
 
         public void DrawWalls()
         {
-            //this.CalcDimensions();
 
-            //Удалим все линии
-            //FilteredElementCollector LinesCollector = new FilteredElementCollector(document);
-            //List<ElementId> Lines = (List<ElementId>)LinesCollector.OfCategory(BuiltInCategory.OST_Walls).ToElementIds();
-            //using (Transaction t = new Transaction(document, "Удаляем прежние структурные линии"))
-            //{
-            //    t.Start();
-
-            //    foreach (ElementId currentLine in Lines)
-            //    {
-            //        try
-            //        {
-            //            document.Delete(currentLine);
-            //        }
-            //        catch (Exception)
-            //        {
-            //        }
-
-
-            //    }
-            //    t.Commit();
-            //}
-
-            //List<double> maxXs = new List<double>();
-            //List<double> maxYs = new List<double>();
-            //List<double> minXs = new List<double>();
-            //List<double> minYs = new List<double>();
-
-            //FilteredElementCollector allElements = new FilteredElementCollector(document);
-            //IList<Element> allElementID = allElements.OfCategory(BuiltInCategory.OST_MechanicalEquipment).WhereElementIsNotElementType().ToElements();
-            //foreach (Element item in allElementID)
-            //{
-            //    BoundingBoxXYZ currentBB = item.get_BoundingBox(document.ActiveView);
-            //    maxXs.Add(currentBB.Max.X);
-            //    maxYs.Add(currentBB.Max.Y);
-            //    minXs.Add(currentBB.Min.X);
-            //    minYs.Add(currentBB.Min.Y);
-            //}
-            //double maxX = maxXs.Max() + deltaForWalls;
-            //double maxY = maxYs.Max() + deltaForWalls;
-            //double minX = minXs.Min() - deltaForWalls;
-            //double minY = minYs.Min() - deltaForWalls;
-
-            //XYZ point1 = new XYZ(minX, minY, 0);
-            //XYZ point2 = new XYZ(minX, maxY, 0);
-            //XYZ point3 = new XYZ(maxX, maxY, 0);
-            //XYZ point4 = new XYZ(maxX, minY, 0);
             IList<Curve> curveLoop = new List<Curve>();
             curveLoop.Add(Autodesk.Revit.DB.Line.CreateBound(pumpStationPoint1, pumpStationPoint1 + new XYZ(PumpStationWidth, 0, 0)));
             curveLoop.Add(Autodesk.Revit.DB.Line.CreateBound(pumpStationPoint1, pumpStationPoint1 + new XYZ(0, PumpStationLength, 0)));
@@ -256,6 +149,8 @@ namespace PumpStationComposer
                 currentWallElement.insertPoint = item;
                 currentWallElement.angle = pointsForLeftWall.CalcAngle();
                 currentWallElement.insert();
+                currentWallElement.setDoubleParameterValue("Высота", PumpStationHeight/304.8);
+
             }
 
 
@@ -275,6 +170,7 @@ namespace PumpStationComposer
                 this.ClearAll();
                 this.DrawPlatform();
                 this.DrawWallsFromElements();
+                this.DrawRoof();
             }
             else
             {
