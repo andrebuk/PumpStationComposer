@@ -54,6 +54,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App.cs" />
+    <Compile Include="CalcPoints.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="FamilyInstanceInsert.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -24,10 +24,15 @@ namespace PumpStationComposer
         public string BoxName = "Шкаф";
         public string PumpName = "Насос с двигателем";
         public string PlatformName = "Опорная конструкция";
+        //Параметры элемента для создания стен и перегородок
+        public string WallElementName = "Перегородка";
+        public double WallElementWidth = 60.0;
+        public double WallElementLength = 211.0;
+
 
 
         public bool onlyLink;
-        public double deltaFromEquipmentToWall = 100 / 304.8;//расстояние от краев оборудования до оси стены
+        public double deltaFromEquipmentToWall = 0.0 / 304.8;//расстояние от краев оборудования до оси стены
 
         public void CalcDimensions()
 
@@ -57,6 +62,10 @@ namespace PumpStationComposer
             double minY = (minYs.Min() - deltaFromEquipmentToWall);
             double maxZ = maxZs.Max();
             double minZ = minZs.Max();
+
+            //Считаем габариты только оборудования, без каких-либо прибавок размеров
+            //pumpStationPoint1 - нижняя левая точка
+            //pumpStationPoint3 - верхняя правая точка
             pumpStationPoint1 = new XYZ(minX, minY, 0);
             pumpStationPoint3 = new XYZ(maxX, maxY, 0);
             PumpStationLength = maxY - minY;
@@ -66,10 +75,6 @@ namespace PumpStationComposer
             {
                 PumpStationHeight = PumpStationHeightMin;
             }
-
-
-
-
         }
 
         public void DrawPlatform()
@@ -234,6 +239,34 @@ namespace PumpStationComposer
 
 
         }
+
+        public void DrawWallFromElements(XYZ p1,XYZ p2)
+
+        {
+            CalcPoints pointsForLeftWall = new CalcPoints();
+            pointsForLeftWall.startPoint = p1;
+            pointsForLeftWall.endPoint = p2;
+            pointsForLeftWall.segmentLength = WallElementLength/304.8;
+            List<XYZ> pointsForWallCreation = pointsForLeftWall.calcPOintsList();
+
+            foreach (XYZ item in pointsForWallCreation)
+            {
+                SMFamily currentWallElement = new SMFamily(document);
+                currentWallElement.familyTypeName = WallElementName;
+                currentWallElement.insertPoint = item;
+                currentWallElement.angle = pointsForLeftWall.CalcAngle();
+                currentWallElement.insert();
+            }
+
+
+        }
+        public void DrawWallsFromElements()
+        {
+            DrawWallFromElements(pumpStationPoint1, pumpStationPoint1 + new XYZ(0, PumpStationLength,0));
+            DrawWallFromElements(pumpStationPoint1 + new XYZ(0, PumpStationLength, 0), pumpStationPoint3);
+            DrawWallFromElements(pumpStationPoint3, pumpStationPoint3 - new XYZ(0, PumpStationLength, 0));
+            DrawWallFromElements(pumpStationPoint1 + new XYZ(PumpStationWidth,0, 0), pumpStationPoint1);
+        }
         public void Create()
         {
             XYZ deltaXYZ = startPoint;
@@ -241,7 +274,7 @@ namespace PumpStationComposer
             {
                 this.ClearAll();
                 this.DrawPlatform();
-                this.DrawWalls();
+                this.DrawWallsFromElements();
             }
             else
             {
@@ -318,7 +351,7 @@ namespace PumpStationComposer
 
 
             FilteredElementCollector allWalls = new FilteredElementCollector(document);
-            ICollection<ElementId> allWallsIds = allWalls.OfCategory(BuiltInCategory.OST_Walls).WhereElementIsNotElementType().ToElementIds();
+            ICollection<ElementId> allWallsIds = allWalls.OfCategory(BuiltInCategory.OST_GenericModel).WhereElementIsNotElementType().ToElementIds();
             using (Transaction t = new Transaction(document, "Удаление всех стен"))
             {
                 t.Start();

@@ -13,6 +13,7 @@ namespace PumpStationComposer
         public Element element;
         public string familyTypeName;
         public XYZ insertPoint;
+        public double angle;
         //public string paramname;
         //public string paramValue;
         public SMFamily(Document doc)
@@ -54,6 +55,15 @@ namespace PumpStationComposer
                 {
                     t.Start();
                     FamilyInstance instance = document.Create.NewFamilyInstance(insertPoint, testFS, Autodesk.Revit.DB.Structure.StructuralType.NonStructural);
+                    if (angle != 0.0)
+                    {
+                        instance.Location.Rotate(Line.CreateBound(insertPoint, new XYZ(insertPoint.X, insertPoint.Y, insertPoint.Z + 10)),angle);
+                        //LocationPoint lp = instance.Location as LocationPoint;
+                        //XYZ pointForRotation = new XYZ(lp.Point.X, lp.Point.Y, 0.0);
+
+                        //Line axis = Line.CreateBound(pointForRotation, new XYZ(pointForRotation.X, pointForRotation.Y, pointForRotation.Z + 10.0));
+                        //ElementTransformUtils.RotateElement(document, instance.Id, axis, angle);
+                    }
                     element = instance as Element;
                     t.Commit();
 
