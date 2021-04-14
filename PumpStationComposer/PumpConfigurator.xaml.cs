@@ -69,8 +69,25 @@ namespace PumpStationComposer
             PST.PumpDimensions = PumpDimensions;
             PST.PumpNozzle = PumpNozzle;
             PST.onlyLink = onlyLink;
-            PST.Create();
+            PST.Create(true);
             
+        }
+        private void Compose_Click(object sender, RoutedEventArgs e)
+        {
+            //testPoint = testPoint + new XYZ(1500 / 304.8, 0, 0);
+            PumpDimensions.Clear();
+            PumpDimensions.Add("Длина", Convert.ToDouble(this.PumpLength.Text));
+            PumpDimensions.Add("Ширина", Convert.ToDouble(this.PumpWidth.Text));
+            PumpDimensions.Add("Высота", Convert.ToDouble(this.PumpHeight.Text));
+
+            PumpStation PST = new PumpStation();
+            PST.startPoint = testPoint;
+            PST.document = document;
+            PST.PumpStationOptions = PumpStationOptions;
+            PST.PumpDimensions = PumpDimensions;
+            PST.PumpNozzle = PumpNozzle;
+            PST.onlyLink = onlyLink;
+            PST.Create(false);
         }
         //Шкаф МСС
         private void MSS_Checked(object sender, RoutedEventArgs e)
@@ -156,34 +173,165 @@ namespace PumpStationComposer
             PumpStationOptions.Add("ОПС", false);
         }
 
-        //private void PumpLength_TextChanged(object sender, TextChangedEventArgs e)
-        //{
-        //    double length = Convert.ToDouble(this.PumpLength.Text);
-        //    PumpDimensions.Remove("Длина");
-        //    PumpDimensions.Add("Длина", length);
-        //}
-
-        //private void PumpWidth_TextChanged(object sender, TextChangedEventArgs e)
-        //{
-        //    double width = Convert.ToDouble(this.PumpWidth.Text);
-        //    PumpDimensions.Remove("Ширина");
-        //    PumpDimensions.Add("Ширина", width);
-        //}
-
-        //private void PumpHeight_TextChanged(object sender, TextChangedEventArgs e)
-        //{
-        //    double height = Convert.ToDouble(this.PumpHeight.Text);
-        //    PumpDimensions.Remove("Высота");
-        //    PumpDimensions.Add("Высота", height);
-        //}
-
-        private void Link_Checked(object sender, RoutedEventArgs e)
-        {
-            onlyLink = true;
+        private void OVVO_Checked(object sender, RoutedEventArgs e)
+        {            
+            PumpStationOptions.Remove("Отсек высоковольтного оборудования");
+            PumpStationOptions.Add("Отсек высоковольтного оборудования", true);
         }
-        private void Link_Unchecked(object sender, RoutedEventArgs e)
-        {
-            onlyLink = false;
+        private void OVVO_Unchecked(object sender, RoutedEventArgs e)
+        {            
+            PumpStationOptions.Remove("Отсек высоковольтного оборудования");
+            PumpStationOptions.Add("Отсек высоковольтного оборудования", false);
         }
+        //--
+        private void Vent_Checked(object sender, RoutedEventArgs e)
+        {
+            PumpStationOptions.Remove("Система вентиляции");
+            PumpStationOptions.Add("Система вентиляции", true);
+        }
+        private void Vent_Unchecked(object sender, RoutedEventArgs e)
+        {
+            PumpStationOptions.Remove("Система вентиляции");
+            PumpStationOptions.Add("Система вентиляции", false);
+        }
+        private void Heat_Checked(object sender, RoutedEventArgs e)
+        {
+            PumpStationOptions.Remove("Система отопления");
+            PumpStationOptions.Add("Система отопления", true);
+        }
+        private void Heat_Unchecked(object sender, RoutedEventArgs e)
+        {
+            PumpStationOptions.Remove("Система отопления");
+            PumpStationOptions.Add("Система отопления", false);
+        }
+        private void Cond_Checked(object sender, RoutedEventArgs e)
+        {
+            PumpStationOptions.Remove("Система кондиционирования");
+            PumpStationOptions.Add("Система кондиционирования", true);
+        }
+        private void Cond_Unchecked(object sender, RoutedEventArgs e)
+        {
+            PumpStationOptions.Remove("Система кондиционирования");
+            PumpStationOptions.Add("Система кондиционирования", false);
+        }
+        private void VEP_Checked(object sender, RoutedEventArgs e)
+        {
+            PumpStationOptions.Remove("ЗРА на всасе с электроприводом");
+            PumpStationOptions.Add("ЗРА на всасе с электроприводом", true);
+        }
+        private void VEP_Unchecked(object sender, RoutedEventArgs e)
+        {
+            PumpStationOptions.Remove("ЗРА на всасе с электроприводом");
+            PumpStationOptions.Add("ЗРА на всасе с электроприводом", false);
+        }
+        private void NEPP_Checked(object sender, RoutedEventArgs e)
+        {
+            PumpStationOptions.Remove("ЗРА на нагнетании с электроприводом и позиционером");
+            PumpStationOptions.Add("ЗРА на нагнетании с электроприводом и позиционером", true);
+        }
+        private void NEPP_Unchecked(object sender, RoutedEventArgs e)
+        {
+            PumpStationOptions.Remove("ЗРА на нагнетании с электроприводом и позиционером");
+            PumpStationOptions.Add("ЗРА на нагнетании с электроприводом и позиционером", false);
+        }
+
+        private void NPSN_Checked(object sender, RoutedEventArgs e)
+        {
+            PumpStationOptions.Remove("ЗРА на патрубке слива напорной магистрали с электроприводом");
+            PumpStationOptions.Add("ЗРА на патрубке слива напорной магистрали с электроприводом", true);
+        }
+        private void NPSN_Unchecked(object sender, RoutedEventArgs e)
+        {
+            PumpStationOptions.Remove("ЗРА на патрубке слива напорной магистрали с электроприводом");
+            PumpStationOptions.Add("ЗРА на патрубке слива напорной магистрали с электроприводом", false);
+        }
+        private void OKSD_Checked(object sender, RoutedEventArgs e)
+        {
+            PumpStationOptions.Remove("Обратный клапан с демфером");
+            PumpStationOptions.Add("Обратный клапан с демфером", true);
+        }
+        private void OKSD_Unchecked(object sender, RoutedEventArgs e)
+        {
+            PumpStationOptions.Remove("Обратный клапан с демфером");
+            PumpStationOptions.Add("Обратный клапан с демфером", false);
+        }
+        private void DDNV_Checked(object sender, RoutedEventArgs e)
+        {
+            PumpStationOptions.Remove("Датчик давления на всасе");
+            PumpStationOptions.Add("Датчик давления на всасе", true);
+        }
+        private void DDNV_Unchecked(object sender, RoutedEventArgs e)
+        {
+            PumpStationOptions.Remove("Датчик давления на всасе");
+            PumpStationOptions.Add("Датчик давления на всасе", false);
+        }
+        private void DDNN_Checked(object sender, RoutedEventArgs e)
+        {
+            PumpStationOptions.Remove("Датчик давления на нагнетании");
+            PumpStationOptions.Add("Датчик давления на нагнетании", true);
+        }
+        private void DDNN_Unchecked(object sender, RoutedEventArgs e)
+        {
+            PumpStationOptions.Remove("Датчик давления на нагнетании");
+            PumpStationOptions.Add("Датчик давления на нагнетании", false);
+        }
+        private void RNP_Checked(object sender, RoutedEventArgs e)
+        {
+            PumpStationOptions.Remove("Расходомер на нагнетании");
+            PumpStationOptions.Add("Расходомер на нагнетании", true);
+        }
+        private void RNP_Unchecked(object sender, RoutedEventArgs e)
+        {
+            PumpStationOptions.Remove("Расходомер на нагнетании");
+            PumpStationOptions.Add("Расходомер на нагнетании", false);
+        }
+        private void VSZ_Checked(object sender, RoutedEventArgs e)
+        {
+            PumpStationOptions.Remove("Вакуумная система заполнения всаса насоса");
+            PumpStationOptions.Add("Вакуумная система заполнения всаса насоса", true);
+        }
+        private void VSZ_Unchecked(object sender, RoutedEventArgs e)
+        {
+            PumpStationOptions.Remove("Вакуумная система заполнения всаса насоса");
+            PumpStationOptions.Add("Вакуумная система заполнения всаса насоса", false);
+        }
+
+        private void Pipe_Checked(object sender, RoutedEventArgs e)
+        {
+            PumpStationOptions.Remove("Трубопровод на всасе 5м");
+            PumpStationOptions.Add("Трубопровод на всасе 5м", true);
+        }
+        private void Pipe_Unchecked(object sender, RoutedEventArgs e)
+        {
+            PumpStationOptions.Remove("Трубопровод на всасе 5м");
+            PumpStationOptions.Add("Трубопровод на всасе 5м", false);
+        }
+        private void Flow_Checked(object sender, RoutedEventArgs e)
+        {
+            PumpStationOptions.Remove("Плавающий водозаборный оголовок");
+            PumpStationOptions.Add("Плавающий водозаборный оголовок", true);
+        }
+        private void Flow_Unchecked(object sender, RoutedEventArgs e)
+        {
+            PumpStationOptions.Remove("Плавающий водозаборный оголовок");
+            PumpStationOptions.Add("Плавающий водозаборный оголовок", false);
+        }
+        private void SDP_Checked(object sender, RoutedEventArgs e)
+        {
+            PumpStationOptions.Remove("Стрела для подъема всасывающей трубы");
+            PumpStationOptions.Add("Стрела для подъема всасывающей трубы", true);
+        }
+        private void SDP_Unchecked(object sender, RoutedEventArgs e)
+        {
+            PumpStationOptions.Remove("Стрела для подъема всасывающей трубы");
+            PumpStationOptions.Add("Стрела для подъема всасывающей трубы", false);
+        }
+
+
+
+
+
+
+
     }
 }

@@ -5,67 +5,67 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:PumpStationComposer"
              mc:Ignorable="d" 
-             d:DesignHeight="606" Width="500">
+             d:DesignHeight="590" Width="500">
     <Grid Margin="0,0,0,0">
-        <Label Content="Габариты двигателя" HorizontalAlignment="Left" Margin="3,-4,0,0" VerticalAlignment="Top" FontSize="14"/>
-        <TextBox Name="PumpLength" HorizontalAlignment="Left" Height="22" Margin="65,27,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120" Text="600"  />
-        <Label Content="Длина" HorizontalAlignment="Left" Margin="7,24,0,0" VerticalAlignment="Top" Height="26"/>
-        <Label Content="Ширина" HorizontalAlignment="Left" Margin="7,50,0,0" VerticalAlignment="Top" Height="26"/>
-        <Label Content="Высота" HorizontalAlignment="Left" Margin="7,74,0,0" VerticalAlignment="Top"/>
-        <TextBox Name="PumpWidth" HorizontalAlignment="Left" Height="22" Margin="65,52,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120"  Text="500" />
-        <TextBox Name="PumpHeight" HorizontalAlignment="Left" Height="22" Margin="65,78,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120"  Text="1500" />
-        <Button Name="Build" Content="Разместить" HorizontalAlignment="Left" Margin="49,508,0,0" VerticalAlignment="Top" Width="75" Click="Build_Click"/>
-        <Label Content="Расположение патрубков" HorizontalAlignment="Left" Margin="208,-2,0,0" VerticalAlignment="Top" FontSize="14"/>
-        <Label Content="Всас" HorizontalAlignment="Left" Margin="208,25,0,0" VerticalAlignment="Top"/>
-        <Label Content="Выкид" HorizontalAlignment="Left" Margin="208,65,0,0" VerticalAlignment="Top"/>
+        <Label Content="Габариты двигателя" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" FontSize="14"/>
+        <TextBox Name="PumpLength" HorizontalAlignment="Left" Height="22" Margin="70,25,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120" Text="600"  />
+        <Label Content="Длина" HorizontalAlignment="Left" Margin="0,25,0,0" VerticalAlignment="Top" Height="26"/>
+        <Label Content="Ширина" HorizontalAlignment="Left" Margin="0,50,0,0" VerticalAlignment="Top" Height="26"/>
+        <Label Content="Высота" HorizontalAlignment="Left" Margin="0,75,0,0" VerticalAlignment="Top"/>
+        <TextBox Name="PumpWidth" HorizontalAlignment="Left" Height="22" Margin="70,50,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120"  Text="500" />
+        <TextBox Name="PumpHeight" HorizontalAlignment="Left" Height="22" Margin="70,75,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120"  Text="1500" />
+        <Button Name="Build" Content="Разместить" HorizontalAlignment="Left" Margin="50,550,0,0" VerticalAlignment="Top" Width="75" Click="Build_Click"/>
+        <Button Name="Compose" Content="Скомпоновать" HorizontalAlignment="Left" Margin="150,550,0,0" VerticalAlignment="Top" Width="75" Click="Compose_Click"/>
+        <Label Content="Расположение патрубков" HorizontalAlignment="Left" Margin="200,0,0,0" VerticalAlignment="Top" FontSize="14"/>
+        <Label Content="Всас" HorizontalAlignment="Left" Margin="200,25,0,0" VerticalAlignment="Top"/>
+        <Label Content="Выкид" HorizontalAlignment="Left" Margin="200,50,0,0" VerticalAlignment="Top"/>
 
-        <ComboBox Name="NozzleInputDir" HorizontalAlignment="Left" Margin="260,29,0,0" VerticalAlignment="Top" Width="114">
+        <ComboBox Name="NozzleInputDir" HorizontalAlignment="Left" Margin="260,25,0,0" VerticalAlignment="Top" Width="114">
             <TextBlock>0</TextBlock>
             <TextBlock>90</TextBlock>
             <TextBlock>180</TextBlock>
             <TextBlock>270</TextBlock>
         </ComboBox>
-        <ComboBox Name="NozzleOutputDir" HorizontalAlignment="Left" Margin="260,69,0,0" VerticalAlignment="Top" Width="114" >
+        <ComboBox Name="NozzleOutputDir" HorizontalAlignment="Left" Margin="260,50,0,0" VerticalAlignment="Top" Width="114" >
             <TextBlock>0</TextBlock>
             <TextBlock>90</TextBlock>
             <TextBlock>180</TextBlock>
             <TextBlock>270</TextBlock>
         </ComboBox>
-        <Label Content="Тип двигателя" HorizontalAlignment="Left" Margin="10,109,0,0" VerticalAlignment="Top"/>
+        <Label Content="Тип двигателя" HorizontalAlignment="Left" Margin="0,100,0,0" VerticalAlignment="Top"/>
 
-        <ComboBox Name="EngineType" HorizontalAlignment="Left" Margin="110,112,0,0" VerticalAlignment="Top" Width="120">
+        <ComboBox Name="EngineType" HorizontalAlignment="Left" Margin="125,100,0,0" VerticalAlignment="Top" Width="120">
             <TextBlock>Электрический</TextBlock>
             <TextBlock>Дизельный</TextBlock>
         </ComboBox>
 
 
-        <CheckBox Name="MSS" Content="МСС с ПЧ" HorizontalAlignment="Left" Margin="5,170,0,0" VerticalAlignment="Top" Checked="MSS_Checked" Unchecked="MSS_Unchecked"/>
-        <CheckBox x:Name="SHUN" Content="ШУН (с ПЛК)" HorizontalAlignment="Left" Margin="89,170,0,0" VerticalAlignment="Top" Checked="SHUN_Checked" Unchecked="SHUN_Unchecked"/>
-        <CheckBox x:Name="VRU" Content="ВРУ" HorizontalAlignment="Left" Margin="186,170,0,0" VerticalAlignment="Top" Checked="VRU_Checked" Unchecked="VRU_Unchecked"/>
-        <CheckBox x:Name="SHSN" Content="ШСН" HorizontalAlignment="Left" Margin="230,170,0,0" VerticalAlignment="Top" Checked="SHSN_Checked" Unchecked="SHSN_Unchecked"/>
-        <CheckBox x:Name="TSN" Content="ТСН" HorizontalAlignment="Left" Margin="283,170,0,0" VerticalAlignment="Top" Checked="TSN_Checked" Unchecked="TSN_Unchecked"/>
-        <CheckBox x:Name="OPS" Content="ОПС" HorizontalAlignment="Left" Margin="332,170,0,0" VerticalAlignment="Top" Checked="OPS_Checked" Unchecked="OPS_Unchecked"/>
-        <Label Content="Шкафы электрооборудования" HorizontalAlignment="Left" Margin="10,141,0,0" VerticalAlignment="Top"/>
-        <CheckBox x:Name="OVVO" Content="Отсек высоковольтного оборудования" HorizontalAlignment="Left" Margin="5,206,0,0" VerticalAlignment="Top"/>
-        <CheckBox x:Name="Vent" Content="Вентиляция" HorizontalAlignment="Left" Margin="5,230,0,0" VerticalAlignment="Top"/>
-        <CheckBox x:Name="Heat" Content="Отопление" HorizontalAlignment="Left" Margin="118,230,0,0" VerticalAlignment="Top"/>
-        <CheckBox x:Name="Cond" Content="Кондиционирование" HorizontalAlignment="Left" Margin="217,230,0,0" VerticalAlignment="Top"/>
-        <Label Content="Запорно-регулирующая арматура" HorizontalAlignment="Left" Margin="10,252,0,0" VerticalAlignment="Top"/>
-        <CheckBox x:Name="VEP" Content="На всасе с э/приводом" HorizontalAlignment="Left" Margin="5,277,0,0" VerticalAlignment="Top"/>
-        <CheckBox x:Name="NEPP" Content="На нагнетании с э/приводом и позиционером" HorizontalAlignment="Left" Margin="157,277,0,0" VerticalAlignment="Top"/>
-        <CheckBox x:Name="NPSN" Content="На патрубке слива напорной магистрали с э/приводом" HorizontalAlignment="Left" Margin="5,293,0,0" VerticalAlignment="Top"/>
-        <CheckBox x:Name="OKSD" Content="Обратный клапан с демфером" HorizontalAlignment="Left" Margin="5,309,0,0" VerticalAlignment="Top"/>
+        <CheckBox Name="MSS" Content="МСС с ПЧ" HorizontalAlignment="Left" Margin="0,175,0,0" VerticalAlignment="Top" Checked="MSS_Checked" Unchecked="MSS_Unchecked"/>
+        <CheckBox x:Name="SHUN" Content="ШУН (с ПЛК)" HorizontalAlignment="Left" Margin="88,175,0,0" VerticalAlignment="Top" Checked="SHUN_Checked" Unchecked="SHUN_Unchecked"/>
+        <CheckBox x:Name="VRU" Content="ВРУ" HorizontalAlignment="Left" Margin="185,175,0,0" VerticalAlignment="Top" Checked="VRU_Checked" Unchecked="VRU_Unchecked"/>
+        <CheckBox x:Name="SHSN" Content="ШСН" HorizontalAlignment="Left" Margin="229,175,0,0" VerticalAlignment="Top" Checked="SHSN_Checked" Unchecked="SHSN_Unchecked"/>
+        <CheckBox x:Name="TSN" Content="ТСН" HorizontalAlignment="Left" Margin="282,175,0,0" VerticalAlignment="Top" Checked="TSN_Checked" Unchecked="TSN_Unchecked"/>
+        <CheckBox x:Name="OPS" Content="ОПС" HorizontalAlignment="Left" Margin="331,175,0,0" VerticalAlignment="Top" Checked="OPS_Checked" Unchecked="OPS_Unchecked"/>
+        <Label Content="Шкафы электрооборудования" HorizontalAlignment="Left" Margin="0,150,0,0" VerticalAlignment="Top"/>
+        <CheckBox x:Name="OVVO" Content="Отсек высоковольтного оборудования" HorizontalAlignment="Left" Margin="0,200,0,0" VerticalAlignment="Top"  Checked="OVVO_Checked" Unchecked="OVVO_Unchecked"/>
+        <CheckBox x:Name="Vent" Content="Вентиляция" HorizontalAlignment="Left" Margin="0,225,0,0" VerticalAlignment="Top" Checked="Vent_Checked" Unchecked="Vent_Unchecked"/>
+        <CheckBox x:Name="Heat" Content="Отопление" HorizontalAlignment="Left" Margin="117,225,0,0" VerticalAlignment="Top" Checked="Heat_Checked" Unchecked="Heat_Unchecked"/>
+        <CheckBox x:Name="Cond" Content="Кондиционирование" HorizontalAlignment="Left" Margin="216,225,0,0" VerticalAlignment="Top" Checked="Cond_Checked" Unchecked="Cond_Unchecked"/>
+        <Label Content="Запорно-регулирующая арматура" HorizontalAlignment="Left" Margin="0,250,0,0" VerticalAlignment="Top"/>
+        <CheckBox x:Name="VEP" Content="На всасе с э/приводом" HorizontalAlignment="Left" Margin="0,275,0,0" VerticalAlignment="Top" Checked="VEP_Checked" Unchecked="VEP_Unchecked"/>
+        <CheckBox x:Name="NEPP" Content="На нагнетании с э/приводом и позиционером" HorizontalAlignment="Left" Margin="156,275,0,0" VerticalAlignment="Top" Checked="NEPP_Checked" Unchecked="NEPP_Unchecked"/>
+        <CheckBox x:Name="NPSN" Content="На патрубке слива напорной магистрали с э/приводом" HorizontalAlignment="Left" Margin="0,300,0,0" VerticalAlignment="Top" Checked="NPSN_Checked" Unchecked="NPSN_Unchecked"/>
+        <CheckBox x:Name="OKSD" Content="Обратный клапан с демфером" HorizontalAlignment="Left" Margin="0,325,0,0" VerticalAlignment="Top" Checked="OKSD_Checked" Unchecked="OKSD_Unchecked"/>
 
-        <Label Content="КИП" HorizontalAlignment="Left" Margin="10,321,0,0" VerticalAlignment="Top"/>
-        <CheckBox x:Name="DDNV" Content="Датчик давления на всасе" HorizontalAlignment="Left" Margin="5,347,0,0" VerticalAlignment="Top"/>
-        <CheckBox x:Name="DDNN" Content="Датчик давления на нагнетании" HorizontalAlignment="Left" Margin="185,347,0,0" VerticalAlignment="Top"/>
-        <CheckBox x:Name="RNP" Content="Расходомер на нагнетании" HorizontalAlignment="Left" Margin="5,364,0,0" VerticalAlignment="Top"/>
-        <Label Content="Прочее" HorizontalAlignment="Left" Margin="10,390,0,0" VerticalAlignment="Top"/>
-        <CheckBox x:Name="VSZ" Content="Вакуумная система заполнения всаса насоса" HorizontalAlignment="Left" Margin="5,416,0,0" VerticalAlignment="Top"/>
-        <CheckBox x:Name="Pipe" Content="Трубопровод на всасе 5м" HorizontalAlignment="Left" Margin="5,433,0,0" VerticalAlignment="Top"/>
-        <CheckBox x:Name="Flow" Content="Плавающий водозаборный оголовок" HorizontalAlignment="Left" Margin="5,450,0,0" VerticalAlignment="Top"/>
-        <CheckBox x:Name="SDP" Content="Стрела для подъема всасывающей трубы" HorizontalAlignment="Left" Margin="5,467,0,0" VerticalAlignment="Top"/>
-        <CheckBox Name="Link" Content="Скомпоновать" HorizontalAlignment="Left" Margin="179,521,0,0" VerticalAlignment="Top" Checked="Link_Checked" Unchecked="Link_Unchecked"/>
+        <Label Content="КИП" HorizontalAlignment="Left" Margin="0,350,0,0" VerticalAlignment="Top"/>
+        <CheckBox x:Name="DDNV" Content="Датчик давления на всасе" HorizontalAlignment="Left" Margin="0,375,0,0" VerticalAlignment="Top" Checked="DDNV_Checked" Unchecked="DDNV_Unchecked"/>
+        <CheckBox x:Name="DDNN" Content="Датчик давления на нагнетании" HorizontalAlignment="Left" Margin="184,375,0,0" VerticalAlignment="Top" Checked="DDNN_Checked" Unchecked="DDNN_Unchecked"/>
+        <CheckBox x:Name="RNP" Content="Расходомер на нагнетании" HorizontalAlignment="Left" Margin="0,400,0,0" VerticalAlignment="Top" Checked="RNP_Checked" Unchecked="RNP_Unchecked"/>
+        <Label Content="Прочее" HorizontalAlignment="Left" Margin="0,425,0,0" VerticalAlignment="Top"/>
+        <CheckBox x:Name="VSZ" Content="Вакуумная система заполнения всаса насоса" HorizontalAlignment="Left" Margin="0,450,0,0" VerticalAlignment="Top" Checked="VSZ_Checked" Unchecked="VSZ_Unchecked"/>
+        <CheckBox x:Name="Pipe" Content="Трубопровод на всасе 5м" HorizontalAlignment="Left" Margin="0,475,0,0" VerticalAlignment="Top" Checked="Pipe_Checked" Unchecked="Pipe_Unchecked"/>
+        <CheckBox x:Name="Flow" Content="Плавающий водозаборный оголовок" HorizontalAlignment="Left" Margin="0,500,0,0" VerticalAlignment="Top" Checked="Flow_Checked" Unchecked="Flow_Unchecked"/>
+        <CheckBox x:Name="SDP" Content="Стрела для подъема всасывающей трубы" HorizontalAlignment="Left" Margin="0,525,0,0" VerticalAlignment="Top" Checked="SDP_Checked" Unchecked="SDP_Unchecked"/>
 
 
 

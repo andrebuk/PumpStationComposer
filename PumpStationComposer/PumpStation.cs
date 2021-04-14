@@ -22,6 +22,7 @@ namespace PumpStationComposer
         public double PumpStationWidth;
         private double PumpStationHeightMin = 2500.0;
         public string BoxName = "Шкаф";
+        public string SystemName = "Опции модели";
         public string PumpName = "Насос с двигателем";
         public string PlatformName = "Опорная конструкция";
         //Параметры элемента для создания стен и перегородок
@@ -162,10 +163,10 @@ namespace PumpStationComposer
             DrawWallFromElements(pumpStationPoint3, pumpStationPoint3 - new XYZ(0, PumpStationLength, 0));
             DrawWallFromElements(pumpStationPoint1 + new XYZ(PumpStationWidth,0, 0), pumpStationPoint1);
         }
-        public void Create()
+        public void Create(bool type)
         {
             XYZ deltaXYZ = startPoint;
-            if (onlyLink == true)
+            if (type == false)
             {
                 this.ClearAll();
                 this.DrawPlatform();
@@ -175,6 +176,7 @@ namespace PumpStationComposer
             else
             {
                 this.ClearAll();
+                //Размещение шкафов
                 List<string> boxTypes = new List<string> { "МСС с ПЧ", "ШУН (с ПЛК)", "ВРУ", "ШСН", "ТСН", "ОПС" };
                 foreach (string currentBoxType in boxTypes)
                 {
@@ -193,6 +195,28 @@ namespace PumpStationComposer
                     }
 
                 }
+                //Размещение систем
+                XYZ SystemInsertPoint = new XYZ();
+                List<string> systemTypes = new List<string> { "Система вентиляции", "Система отопления", "Система кондиционирования",
+                "ЗРА на всасе с электроприводом", "ЗРА на нагнетании с электроприводом и позиционером","ЗРА на патрубке слива напорной магистрали с электроприводом",
+                "Обратный клапан с демфером","Датчик давления на всасе","Датчик давления на нагнетании","Расходомер на нагнетании","Трубопровод на всасе 5м",
+                "Плавающий водозаборный оголовок","Стрела для подъема всасывающей трубы"};
+                foreach (string currentSystemType in systemTypes)
+                {
+                    PumpStationOptions.TryGetValue(currentSystemType, out bool value);
+                    if (value)
+                    {
+                        SMFamily mss = new SMFamily(document);
+                        mss.insertPoint = SystemInsertPoint;
+                        mss.familyTypeName = SystemName;
+                        mss.insert();                       
+                        mss.setStringParameterValue("ADSK_Наименование", currentSystemType);
+                        SystemInsertPoint = SystemInsertPoint + new XYZ(1/304.8, 0, 0);
+
+                    }
+
+                }
+
                 //вернем точку на край последнего шкафа
                 PumpDimensions.TryGetValue("Длина", out double pumpLength);
                 PumpDimensions.TryGetValue("Ширина", out double pumpWidth);
