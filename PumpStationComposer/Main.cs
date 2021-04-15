@@ -13,11 +13,13 @@ namespace PumpStationComposer
     [Transaction(TransactionMode.Manual)]
     public class Main : IExternalCommand
     {
+        
         public Result Execute(ExternalCommandData commandData, ref string message, ElementSet elements)
         {
             Document document = commandData.Application.ActiveUIDocument.Document;
-            PumpConfigurator pc = new PumpConfigurator(document);
-
+            UIDocument uidocument = commandData.Application.ActiveUIDocument;
+            PumpConfigurator pc = new PumpConfigurator(document, uidocument);
+            
             pc.ShowDialog();
             return Result.Succeeded;
 

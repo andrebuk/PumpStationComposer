@@ -63,6 +63,7 @@
     </Compile>
     <Compile Include="PumpStation.cs" />
     <Compile Include="SMFamily.cs" />
+    <Compile Include="TestClass.cs" />
   </ItemGroup>
   <ItemGroup>
     <Page Include="PumpConfigurator.xaml">

@@ -13,6 +13,9 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Autodesk.Revit.DB;
+using Autodesk.Revit.UI.Selection;
+using Autodesk.Revit.UI;
+
 
 
 namespace PumpStationComposer
@@ -23,22 +26,19 @@ namespace PumpStationComposer
     public partial class PumpConfigurator : Window
     {
         public Document document;
+        public UIDocument uidocument;
         public Dictionary<string, bool> PumpStationOptions = new Dictionary<string, bool>(20);
         public Dictionary<string, double> PumpDimensions=new Dictionary<string, double>(3);
             
-        //    = new Dictionary<string, double>
-        //{
-        //    {"Длина", 1500.0 },
-        //    {"Ширина", 1500.0 },
-        //    {"Высота", 1500.0 }
-        //};
+
         public Dictionary<string, int> PumpNozzle = new Dictionary<string, int>(2);
         public Dictionary<string, string> PumpEngine = new Dictionary<string, string>(1);
         public XYZ testPoint = new XYZ();
         public bool onlyLink;
-        public PumpConfigurator(Document doc)
+        public PumpConfigurator(Document doc, UIDocument uidoc)
         {
             document = doc;
+            uidocument = uidoc;
             InitializeComponent();
         }
 
@@ -71,6 +71,12 @@ namespace PumpStationComposer
             PST.onlyLink = onlyLink;
             PST.Create(true);
             
+        }
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            TestClass tc = new TestClass(uidocument);
+            tc.isolate();
+
         }
         private void Compose_Click(object sender, RoutedEventArgs e)
         {
@@ -327,11 +333,6 @@ namespace PumpStationComposer
             PumpStationOptions.Add("Стрела для подъема всасывающей трубы", false);
         }
 
-
-
-
-
-
-
+        
     }
 }
