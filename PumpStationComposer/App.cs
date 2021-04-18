@@ -38,6 +38,7 @@ namespace PumpStationComposer
             pb1.ToolTip = "Конструктор насосной станции";
             BitmapImage pb1Image = new BitmapImage(new Uri("pack://application:,,,/PumpStationComposer;component/Resources/PumpStationComposer.png"));
             pb1.LargeImage = pb1Image;
+            
         }
 
         public Result OnShutdown(UIControlledApplication application)

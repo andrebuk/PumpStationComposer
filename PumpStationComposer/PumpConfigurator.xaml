@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:PumpStationComposer"
              mc:Ignorable="d" 
+        
              d:DesignHeight="620" Width="458">
     <Grid Margin="0,0,0,0">
         <Label Content="Габариты двигателя" HorizontalAlignment="Left" Margin="5,0,0,0" VerticalAlignment="Top" FontSize="14"/>

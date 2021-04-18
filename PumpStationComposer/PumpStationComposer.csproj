@@ -74,9 +74,8 @@
   <ItemGroup>
     <None Include="PumpSationComposer.addin" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
-    <Resource Include="Resources\PumpStationComposer.png" />
+    <Content Include="Resources\PumpStationComposer.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
