@@ -5,18 +5,32 @@ using System.Text;
 using System.Threading.Tasks;
 using Autodesk.Revit.UI;
 using Autodesk.Revit.DB;
+using Autodesk.Revit.Attributes;
 
-namespace PumpStationComposer
+namespace CommonCommands
 {
-    class TestClass
+    [Transaction(TransactionMode.Manual)]
+    class Isolation : IExternalCommand
+    {
+        //public UIDocument uidocument;
+
+        public Result Execute(ExternalCommandData commandData, ref string message, ElementSet elements)
+        {
+            UIDocument uidocument = commandData.Application.ActiveUIDocument;
+            IS isolationObject = new IS(uidocument);
+            isolationObject.isolate();
+
+            return Result.Succeeded;
+        }
+    }
+    class IS
     {
         public UIDocument uidocument;
 
-        public TestClass(UIDocument UIdoc)
+        public IS(UIDocument UIdoc)
         {
             uidocument = UIdoc;
         }
-
         public void isolate()
         {
             View activeView = uidocument.Document.ActiveView;
@@ -25,10 +39,15 @@ namespace PumpStationComposer
             {
                 using (Transaction t = new Transaction(uidocument.Document, "Isolate element"))
                 {
-                    t.Start();
-                    var selectedElement = uidocument.Selection.GetElementIds().First();
-                   activeView.IsolateElementTemporary(selectedElement);
-                    t.Commit();
+
+                    var selectedElements = uidocument.Selection.GetElementIds();
+                    if (selectedElements.Count > 0)
+                    {
+                        t.Start();
+                        //activeView.IsolateElementsTemporary
+                        activeView.IsolateElementsTemporary(selectedElements);
+                        t.Commit();
+                    }
                 }
             }
             else

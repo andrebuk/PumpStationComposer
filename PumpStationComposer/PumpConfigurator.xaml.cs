@@ -72,12 +72,7 @@ namespace PumpStationComposer
             PST.Create(true);
             
         }
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            TestClass tc = new TestClass(uidocument);
-            tc.isolate();
-
-        }
+       
         private void Compose_Click(object sender, RoutedEventArgs e)
         {
             //testPoint = testPoint + new XYZ(1500 / 304.8, 0, 0);

@@ -31,6 +31,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AdWindows">
+      <HintPath>..\..\..\..\..\..\Program Files\Autodesk\Revit 2021\AdWindows.dll</HintPath>
+    </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="RevitAPI">
@@ -63,7 +66,7 @@
     </Compile>
     <Compile Include="PumpStation.cs" />
     <Compile Include="SMFamily.cs" />
-    <Compile Include="TestClass.cs" />
+    <Compile Include="Isolation.cs" />
   </ItemGroup>
   <ItemGroup>
     <Page Include="PumpConfigurator.xaml">
@@ -75,7 +78,10 @@
     <None Include="PumpSationComposer.addin" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Resources\PumpStationComposer.png" />
+    <Resource Include="Resources\PumpStationComposer.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\IsolateButton.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
