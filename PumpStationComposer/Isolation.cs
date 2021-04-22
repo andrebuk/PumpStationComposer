@@ -12,14 +12,11 @@ namespace CommonCommands
     [Transaction(TransactionMode.Manual)]
     class Isolation : IExternalCommand
     {
-        //public UIDocument uidocument;
-
         public Result Execute(ExternalCommandData commandData, ref string message, ElementSet elements)
         {
             UIDocument uidocument = commandData.Application.ActiveUIDocument;
             IS isolationObject = new IS(uidocument);
             isolationObject.isolate();
-
             return Result.Succeeded;
         }
     }

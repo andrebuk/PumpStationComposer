@@ -11,6 +11,8 @@ namespace PumpStationComposer
     {
         public Document document;
         public Element element;
+        public Element baseElement;//базовый элемент для размещения элемента
+        public Level baseLevel;//базовый уровень для размещения элемента
         public string familyTypeName;
         public XYZ insertPoint;
         public double angle;
@@ -54,10 +56,42 @@ namespace PumpStationComposer
                 using (Transaction t = new Transaction(document, "Создание объектов насосной станции"))
                 {
                     t.Start();
-                    FamilyInstance instance = document.Create.NewFamilyInstance(insertPoint, testFS, Autodesk.Revit.DB.Structure.StructuralType.NonStructural);
+                   
+                     FamilyInstance   instance = document.Create.NewFamilyInstance(insertPoint, testFS, Autodesk.Revit.DB.Structure.StructuralType.NonStructural);
+                    
+                    
                     if (angle != 0.0)
                     {
-                        instance.Location.Rotate(Line.CreateBound(insertPoint, new XYZ(insertPoint.X, insertPoint.Y, insertPoint.Z + 10)),angle);
+                        instance.Location.Rotate(Line.CreateBound(insertPoint, new XYZ(insertPoint.X, insertPoint.Y, insertPoint.Z + 10)), angle);
+                        //LocationPoint lp = instance.Location as LocationPoint;
+                        //XYZ pointForRotation = new XYZ(lp.Point.X, lp.Point.Y, 0.0);
+
+                        //Line axis = Line.CreateBound(pointForRotation, new XYZ(pointForRotation.X, pointForRotation.Y, pointForRotation.Z + 10.0));
+                        //ElementTransformUtils.RotateElement(document, instance.Id, axis, angle);
+                    }
+                    element = instance as Element;
+                    t.Commit();
+
+                }
+            }
+
+        }
+        public void insertWithBaseAndLevel()
+        {
+            SMFamily test = new SMFamily(document);
+            FamilySymbol testFS = test.IsExist(familyTypeName);
+            if (testFS != null)
+            {
+                using (Transaction t = new Transaction(document, "Создание объектов насосной станции"))
+                {
+                    t.Start();
+
+                    FamilyInstance instance = document.Create.NewFamilyInstance(insertPoint, testFS, baseElement, baseLevel as Level, Autodesk.Revit.DB.Structure.StructuralType.NonStructural);
+
+
+                    if (angle != 0.0)
+                    {
+                        instance.Location.Rotate(Line.CreateBound(insertPoint, new XYZ(insertPoint.X, insertPoint.Y, insertPoint.Z + 10)), angle);
                         //LocationPoint lp = instance.Location as LocationPoint;
                         //XYZ pointForRotation = new XYZ(lp.Point.X, lp.Point.Y, 0.0);
 
