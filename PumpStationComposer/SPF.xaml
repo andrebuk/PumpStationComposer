@@ -5,12 +5,15 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:PumpStationComposer"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="200">
+             Height="700" Width="250" ResizeMode="NoResize">
     <Grid Margin="0,0,0,0">
-        <ListBox Name="Groups" HorizontalAlignment="Left" Height="262" Margin="43,42,0,0" VerticalAlignment="Top" Width="96">
-        
-        </ListBox>
-        <Button Content="Назначить" HorizontalAlignment="Left" Margin="56,366,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click"/>
+        <ListBox Name="Groups" HorizontalAlignment="Left" Height="262" Margin="11,10,0,0" VerticalAlignment="Top" Width="218" SelectionChanged="Groups_SelectionChanged" />
+
+
+        <Button Content="Назначить" HorizontalAlignment="Left" Margin="85,629,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click"/>
+        <ListBox Name="Parameters" HorizontalAlignment="Left" Height="275" Margin="14,285,0,0" VerticalAlignment="Top" Width="213" SelectionMode="Multiple"/>
+        <RadioButton Name="paraType" Content="Типа" HorizontalAlignment="Left" Margin="18,585,0,0" VerticalAlignment="Top" Checked="paraType_Checked"/>
+        <RadioButton Name="paraInst" Content="Экземпляра" HorizontalAlignment="Left" Margin="141,585,0,0" VerticalAlignment="Top" Checked="paraInst_Checked" IsChecked="True"/>
 
     </Grid>
 </Window>
