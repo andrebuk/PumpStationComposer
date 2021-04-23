@@ -77,6 +77,26 @@ namespace PumpStationComposer
             BitmapImage pb1Image = new BitmapImage(new Uri("pack://application:,,,/PumpStationComposer;component/Resources/IsolateButton.png"));
             pb1.LargeImage = pb1Image;
         }
+        static void AddButtonToRibbonPanelSPF(UIControlledApplication application)
+        {
+            String tabName = "Sever Minerals";
+            String ribbonPanelName = "Параметры";
+            AddTab(application, tabName);
+            Autodesk.Revit.UI.RibbonPanel ribbonPanel = createRibbonPanel(application, tabName, ribbonPanelName);
+            // Get dll assembly path
+            string thisAssemblyPath = Assembly.GetExecutingAssembly().Location;
+            // create push button for CurveTotalLength
+            PushButtonData b1Data = new PushButtonData(
+                "cmdSPF",
+               // "Total" + System.Environment.NewLine + "  Length  ",
+               "Назначение общих параметров",
+                thisAssemblyPath,
+                "CommonCommands.MainSPF");
+            PushButton pb1 = ribbonPanel.AddItem(b1Data) as PushButton;
+            pb1.ToolTip = "Изолировать выбранный объект";
+            BitmapImage pb1Image = new BitmapImage(new Uri("pack://application:,,,/PumpStationComposer;component/Resources/SPF_icon.png"));
+            pb1.LargeImage = pb1Image;
+        }
 
         public Result OnShutdown(UIControlledApplication application)
         {
@@ -87,8 +107,16 @@ namespace PumpStationComposer
         public Result OnStartup(UIControlledApplication application)
         {
             // call our method that will load up our toolbar
-            AddButtonToRibbonPanelPSC(application);
+
+            //Autodesk.Revit.UI.TaskDialog.Show("Сообщение", Environment.UserName);
+            if (Environment.UserName == "bukhvan")
+            {
+                AddButtonToRibbonPanelPSC(application);
+
+            }
             AddButtonToRibbonPanelIsolate(application);
+            AddButtonToRibbonPanelSPF(application);
+
             return Result.Succeeded;
         }
     }

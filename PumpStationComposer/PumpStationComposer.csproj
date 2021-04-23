@@ -60,6 +60,7 @@
     <Compile Include="CalcPoints.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="FamilyInstanceInsert.cs" />
+    <Compile Include="MainSPF.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PumpConfigurator.xaml.cs">
       <DependentUpon>PumpConfigurator.xaml</DependentUpon>
@@ -67,9 +68,16 @@
     <Compile Include="PumpStation.cs" />
     <Compile Include="SMFamily.cs" />
     <Compile Include="Isolation.cs" />
+    <Compile Include="SPF.xaml.cs">
+      <DependentUpon>SPF.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Page Include="PumpConfigurator.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SPF.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -82,6 +90,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\IsolateButton.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\SPF_icon.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
