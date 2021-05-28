@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:SeverMineralsCommon"
              mc:Ignorable="d" 
-             Height="710" Width="260" ResizeMode="NoResize" Title="Общие параметры" Icon="Resources/SeverMineralsLogo.png">
+             Height="710" Width="250" ResizeMode="NoResize" Title="Общие параметры" Icon="Resources/SeverMineralsLogo.png">
 
     <Grid Margin="0,0,0,0">
         <ListBox Name="Groups" HorizontalAlignment="Left" Height="230" Margin="2,2,0,0" VerticalAlignment="Top" Width="240" SelectionChanged="Groups_SelectionChanged" />
@@ -17,7 +17,6 @@
 
         <ListBox Name="Parameters" HorizontalAlignment="Left" Height="275" Margin="2,237,0,0" VerticalAlignment="Top" Width="240" SelectionMode="Multiple"/>
         <ListBox Name="ParameterGroup" HorizontalAlignment="Left" Height="115" Margin="2,519,0,0" VerticalAlignment="Top" Width="240" SelectionMode="Single"/>
-        <Button Content="Button" HorizontalAlignment="Left" Margin="222,646,0,0" VerticalAlignment="Top" Width="12" Click="Button_Click"/>
 
     </Grid>
 </Window>

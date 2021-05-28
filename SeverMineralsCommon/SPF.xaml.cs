@@ -107,6 +107,8 @@ namespace CommonCommands
             FamilyManager familyManager = document.FamilyManager;
             System.Collections.IList selectedParameters = this.Parameters.SelectedItems;
             Dictionary<string, FamilyParameter> allParam = this.GetAllParameters();
+            List<string>  allParamnames = new List<string> (allParam.Keys);
+
             //DefinitionGroup myGroup = allDefGroups.get_Item(this.Groups.SelectedItem.ToString());
             //definitions = myGroup.Definitions;
             foreach (object currentParameter in selectedParameters)
@@ -115,31 +117,46 @@ namespace CommonCommands
                 using (Transaction t = new Transaction(document, "Назначение общего параметра"))
                 {
                     t.Start();
-                    try
+
+                    if (allParamnames.Contains(currentParameter.ToString()))
+                        //если параметр уже есть  - то меняем его тип
                     {
-                        familyParameterGroupDict.TryGetValue((string)this.ParameterGroup.SelectedItem, out BuiltInParameterGroup currentFamilyParameterGroup);
-
-
-                        familyManager.AddParameter(eDef, currentFamilyParameterGroup, isInstance);
-
-                    }
-                    catch (Exception e)
-                    {
-                        //найдем сам параметр
-                        //FamilyParameter existingParam;
                         allParam.TryGetValue(currentParameter.ToString(), out FamilyParameter existingParam);
-                       //Пока считаем что ошибка возникает только из за того что такой общий уже существует
-                       if (isInstance)
+                        //Пока считаем что ошибка возникает только из за того что такой общий уже существует
+                        if (isInstance)
                         {
+                            
                             familyManager.MakeInstance(existingParam);
 
                         }
-                       else
+                        else
                         {
                             familyManager.MakeType(existingParam);
                         }
-                       
                     }
+                   //Если параметр не существует, то создаем его
+                    else
+
+                    {
+                        try
+                        {
+                            familyParameterGroupDict.TryGetValue((string)this.ParameterGroup.SelectedItem, out BuiltInParameterGroup currentFamilyParameterGroup);
+
+
+                            familyManager.AddParameter(eDef, currentFamilyParameterGroup, isInstance);
+
+                        }
+                        catch (Exception e)
+                        {
+                            //найдем сам параметр
+                            //FamilyParameter existingParam;
+
+
+                        }
+                    }
+
+
+                   
                     t.Commit();
 
                 }
@@ -182,10 +199,10 @@ namespace CommonCommands
 
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            GetAllParameters();
-        }
+        //private void Button_Click(object sender, RoutedEventArgs e)
+        //{
+        //    GetAllParameters();
+        //}
 
         public void ShowAllParameters()
 
