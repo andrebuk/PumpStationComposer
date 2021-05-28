@@ -18,9 +18,21 @@ namespace CommonCommands
         {
             Document document = commandData.Application.ActiveUIDocument.Document;
             UIDocument uidocument = commandData.Application.ActiveUIDocument;
-            SPF spf = new SPF(document, uidocument);
-            spf.setGroups();
-            spf.ShowDialog();
+
+
+            DefinitionFile defFile = uidocument.Application.Application.OpenSharedParameterFile();
+            if (defFile != null)
+            {
+                SPF spf = new SPF(document, uidocument);
+                spf.setGroups();
+                spf.setFamilyParamaterGroups();
+                spf.ShowDialog();
+            }
+            else
+            {
+                TaskDialog.Show("Ошибка", "Не указан или не найден файл общих параметров");
+            }
+
             return Result.Succeeded;
         }
     }

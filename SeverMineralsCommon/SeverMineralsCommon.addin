@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <RevitAddIns>
-	<AddIn Type="Command">
-		<Assembly>PumpStationComposer.dll</Assembly>
+	<AddIn Type="Application">
+		<Assembly>SeverMineralsCommon.dll</Assembly>
 		<ClientId>B29BFCD5-24F3-4E6E-8345-99BED4D53452</ClientId>
-		<FullClassName>PumpStationComposer.Main</FullClassName>
-		<Name>EquipmentContructorV001</Name>
+		<FullClassName>SeverMineralsCommon.App</FullClassName>
+		<Name>Sever Minerals</Name>
 		<VendorId>SM</VendorId>
 		<VendorDescription>severminerals.com</VendorDescription>
 	</AddIn>

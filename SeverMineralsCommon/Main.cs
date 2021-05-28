@@ -8,7 +8,7 @@ using Autodesk.Revit.UI;
 using Autodesk.Revit.Attributes;
 
 
-namespace PumpStationComposer
+namespace SeverMineralsCommon
 {
     [Transaction(TransactionMode.Manual)]
     public class Main : IExternalCommand

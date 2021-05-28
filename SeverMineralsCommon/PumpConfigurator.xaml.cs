@@ -18,7 +18,7 @@ using Autodesk.Revit.UI;
 
 
 
-namespace PumpStationComposer
+namespace SeverMineralsCommon
 {
     /// <summary>
     /// Логика взаимодействия для PumpConfigurator.xaml

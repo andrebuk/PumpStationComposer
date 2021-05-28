@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Autodesk.Revit.DB;
 //test comment33333333
-namespace PumpStationComposer
+namespace SeverMineralsCommon
 {
     public class SMFamily
     {
@@ -80,13 +80,16 @@ namespace PumpStationComposer
         {
             SMFamily test = new SMFamily(document);
             FamilySymbol testFS = test.IsExist(familyTypeName);
+
+            Level level = document.GetElement(baseElement.LevelId) as Level;
             if (testFS != null)
             {
                 using (Transaction t = new Transaction(document, "Создание объектов насосной станции"))
                 {
                     t.Start();
 
-                    FamilyInstance instance = document.Create.NewFamilyInstance(insertPoint, testFS, baseElement, baseLevel as Level, Autodesk.Revit.DB.Structure.StructuralType.NonStructural);
+                    //FamilyInstance instance = document.Create.NewFamilyInstance(insertPoint, testFS, baseElement, baseLevel as Level, Autodesk.Revit.DB.Structure.StructuralType.NonStructural);
+                    FamilyInstance instance = document.Create.NewFamilyInstance(insertPoint, testFS, baseElement, level as Level, Autodesk.Revit.DB.Structure.StructuralType.NonStructural);
 
 
                     if (angle != 0.0)

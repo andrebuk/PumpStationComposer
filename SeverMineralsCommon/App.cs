@@ -10,7 +10,7 @@ using Autodesk.Revit.UI;
 using System.Windows.Media.Imaging;
 using Autodesk.Windows;
 
-namespace PumpStationComposer
+namespace SeverMineralsCommon
 {
     class App : IExternalApplication
     {
@@ -49,12 +49,12 @@ namespace PumpStationComposer
             PushButtonData b1Data = new PushButtonData(
                 "cmdPSC",
                // "Total" + System.Environment.NewLine + "  Length  ",
-               "Станция",
+               "Станция9",
                 thisAssemblyPath,
-                "PumpStationComposer.Main");
+                "SeverMineralsCommon.Main");
             PushButton pb1 = ribbonPanel.AddItem(b1Data) as PushButton;
             pb1.ToolTip = "Конструктор2 насосной станции";
-            BitmapImage pb1Image = new BitmapImage(new Uri("pack://application:,,,/PumpStationComposer;component/Resources/PumpStationComposer.png"));
+            BitmapImage pb1Image = new BitmapImage(new Uri("pack://application:,,,/SeverMineralsCommon;component/Resources/PumpStationComposer.png"));
             pb1.LargeImage = pb1Image;
         }
         static void AddButtonToRibbonPanelIsolate(UIControlledApplication application)
@@ -74,7 +74,7 @@ namespace PumpStationComposer
                 "CommonCommands.Isolation");
             PushButton pb1 = ribbonPanel.AddItem(b1Data) as PushButton;
             pb1.ToolTip = "Изолировать выбранный объект";
-            BitmapImage pb1Image = new BitmapImage(new Uri("pack://application:,,,/PumpStationComposer;component/Resources/IsolateButton.png"));
+            BitmapImage pb1Image = new BitmapImage(new Uri("pack://application:,,,/SeverMineralsCommon;component/Resources/IsolateButton.png"));
             pb1.LargeImage = pb1Image;
         }
         static void AddButtonToRibbonPanelSPF(UIControlledApplication application)
@@ -89,12 +89,12 @@ namespace PumpStationComposer
             PushButtonData b1Data = new PushButtonData(
                 "cmdSPF",
                // "Total" + System.Environment.NewLine + "  Length  ",
-               "Назначение общих параметров",
+               "Общие",
                 thisAssemblyPath,
                 "CommonCommands.MainSPF");
             PushButton pb1 = ribbonPanel.AddItem(b1Data) as PushButton;
             pb1.ToolTip = "Изолировать выбранный объект";
-            BitmapImage pb1Image = new BitmapImage(new Uri("pack://application:,,,/PumpStationComposer;component/Resources/SPF_icon.png"));
+            BitmapImage pb1Image = new BitmapImage(new Uri("pack://application:,,,/SeverMineralsCommon;component/Resources/SPF_icon.png"));
             pb1.LargeImage = pb1Image;
         }
 

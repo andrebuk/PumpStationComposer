@@ -7,8 +7,8 @@
     <ProjectGuid>{7F2F96FA-D2BF-42CA-8B28-F71535F26549}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>PumpStationComposer</RootNamespace>
-    <AssemblyName>PumpStationComposer</AssemblyName>
+    <RootNamespace>SeverMineralsCommon</RootNamespace>
+    <AssemblyName>SeverMineralsCommon</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -33,6 +33,7 @@
   <ItemGroup>
     <Reference Include="AdWindows">
       <HintPath>..\..\..\..\..\..\Program Files\Autodesk\Revit 2021\AdWindows.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
@@ -83,7 +84,7 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <None Include="PumpSationComposer.addin" />
+    <None Include="SeverMineralsCommon.addin" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\PumpStationComposer.png" />
@@ -94,8 +95,11 @@
   <ItemGroup>
     <Resource Include="Resources\SPF_icon.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\SeverMineralsLogo.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>xcopy /Y "$(ProjectDir)Bin\Debug\PumpStationComposer.dll" "C:\ProgramData\Autodesk\Revit\Addins\2021"</PostBuildEvent>
+    <PostBuildEvent>xcopy /Y "$(ProjectDir)Bin\Debug\SeverMineralsCommon.dll" "C:\Users\bukhvan\AppData\Roaming\Autodesk\Revit\Addins\2021"</PostBuildEvent>
   </PropertyGroup>
 </Project>

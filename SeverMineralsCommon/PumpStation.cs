@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace PumpStationComposer
+namespace SeverMineralsCommon
 {
     class PumpStation
     {
@@ -123,7 +123,7 @@ namespace PumpStationComposer
             pumpStationPoint4 = new XYZ(xMax, yMin, 0);
 
             PumpDimensions.TryGetValue("Длина", out double pumpLength);
-            double yMinOfPump = pumpCentralPoint.Y - pumpLength / 2 / inch - WallThickness / 2 / inch;
+            double yMinOfPump = pumpCentralPoint.Y - pumpLength / 2 / inch - WallThickness / 2 / inch - 100/inch;
             pumpStationPoint5 = new XYZ(xMin, yMinOfPump, 0);
             pumpStationPoint6 = new XYZ(xMax, yMinOfPump, 0);
 
@@ -284,18 +284,20 @@ namespace PumpStationComposer
             PumpStationOptions.TryGetValue("Отсек высоковольтного оборудования", out bool OVVO_build);
             if (OVVO_build)
             {
-
+                SMFamily doorVV = new SMFamily(document);
+                doorVV.insertPoint = pumpStationPoint4 + new XYZ(0, 700 / inch, 0);
+                doorVV.familyTypeName = DoorElementName;
+                doorVV.baseElement = wallForDoors;
+                doorVV.baseLevel = levelElement;
+                doorVV.insertWithBaseAndLevel();
             }
-            else
-            {
-                SMFamily door = new SMFamily(document);
-                door.insertPoint = pumpStationPoint3+ new XYZ(0,1000,0);
-                door.familyTypeName = DoorElementName;
-                door.baseElement = wallForDoors;
-                door.baseLevel = levelElement;
-                door.insert();
 
-            }
+            SMFamily door = new SMFamily(document);
+            door.insertPoint = pumpStationPoint3 + new XYZ(0, -700 / inch, 0);
+            door.familyTypeName = DoorElementName;
+            door.baseElement = wallForDoors;
+            door.baseLevel = levelElement;
+            door.insertWithBaseAndLevel();
         }
         public void Create(bool type)
         {
@@ -434,6 +436,22 @@ namespace PumpStationComposer
                 try
                 {
                     document.Delete(allWallsIds);
+                }
+                catch (Exception)
+                {
+
+                }
+
+                t.Commit();
+            }
+            FilteredElementCollector allDoorss = new FilteredElementCollector(document);
+            ICollection<ElementId> allDoorsIds = allWalls.OfCategory(BuiltInCategory.OST_Doors).WhereElementIsNotElementType().ToElementIds();
+            using (Transaction t = new Transaction(document, "Удаление всех дверей"))
+            {
+                t.Start();
+                try
+                {
+                    document.Delete(allDoorsIds);
                 }
                 catch (Exception)
                 {
