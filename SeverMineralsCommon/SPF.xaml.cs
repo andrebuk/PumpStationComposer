@@ -17,7 +17,7 @@ using Autodesk.Revit.Attributes;
 using Autodesk.Revit.UI;
 
 
-namespace CommonCommands
+namespace SeverMineralsCommon
 {
     /// <summary>
     /// Логика взаимодействия для SPF.xaml

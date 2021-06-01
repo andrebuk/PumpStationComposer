@@ -61,6 +61,7 @@
     <Compile Include="CalcPoints.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="FamilyInstanceInsert.cs" />
+    <Compile Include="MainSCopy.cs" />
     <Compile Include="MainSPF.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PumpConfigurator.xaml.cs">
@@ -69,6 +70,10 @@
     <Compile Include="PumpStation.cs" />
     <Compile Include="SMFamily.cs" />
     <Compile Include="Isolation.cs" />
+    <Compile Include="SCopy.xaml.cs">
+      <DependentUpon>SCopy.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SMViewSchedule.cs" />
     <Compile Include="SPF.xaml.cs">
       <DependentUpon>SPF.xaml</DependentUpon>
     </Compile>
@@ -77,6 +82,10 @@
     <Page Include="PumpConfigurator.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SCopy.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="SPF.xaml">
       <SubType>Designer</SubType>
@@ -97,6 +106,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\SeverMineralsLogo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\SCopyButton.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

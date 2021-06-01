@@ -9,9 +9,10 @@ using Autodesk.Revit.UI;
 
 
 namespace SeverMineralsCommon
+
 {
     [Transaction(TransactionMode.Manual)]
-    class MainSPF : IExternalCommand
+    class MainSCopy : IExternalCommand
     {
 
         public Result Execute(ExternalCommandData commandData, ref string message, ElementSet elements)
@@ -20,18 +21,12 @@ namespace SeverMineralsCommon
             UIDocument uidocument = commandData.Application.ActiveUIDocument;
 
 
-            DefinitionFile defFile = uidocument.Application.Application.OpenSharedParameterFile();
-            if (defFile != null)
-            {
-                SPF spf = new SPF(document, uidocument);
-                spf.setGroups();
-                spf.setFamilyParamaterGroups();
-                spf.ShowDialog();
-            }
-            else
-            {
-                TaskDialog.Show("Ошибка", "Не указан или не найден файл общих параметров");
-            }
+
+            SCopy sCopy = new SCopy(document, uidocument);
+            sCopy.SpecSelection();
+            //spf.setFamilyParamaterGroups();
+            sCopy.ShowDialog();
+
 
             return Result.Succeeded;
         }

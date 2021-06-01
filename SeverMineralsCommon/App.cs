@@ -71,12 +71,33 @@ namespace SeverMineralsCommon
                // "Total" + System.Environment.NewLine + "  Length  ",
                "Изоляция объектов",
                 thisAssemblyPath,
-                "CommonCommands.Isolation");
+                "SeverMineralsCommon.Isolation");
             PushButton pb1 = ribbonPanel.AddItem(b1Data) as PushButton;
             pb1.ToolTip = "Изолировать выбранный объект";
             BitmapImage pb1Image = new BitmapImage(new Uri("pack://application:,,,/SeverMineralsCommon;component/Resources/IsolateButton.png"));
             pb1.LargeImage = pb1Image;
         }
+        static void AddButtonToRibbonPanelSCopy(UIControlledApplication application)
+        {
+            String tabName = "Sever Minerals";
+            String ribbonPanelName = "Спецификации";
+            AddTab(application, tabName);
+            Autodesk.Revit.UI.RibbonPanel ribbonPanel = createRibbonPanel(application, tabName, ribbonPanelName);
+            // Get dll assembly path
+            string thisAssemblyPath = Assembly.GetExecutingAssembly().Location;
+            // create push button for CurveTotalLength
+            PushButtonData b1Data = new PushButtonData(
+                "cmdSCopy",
+               // "Total" + System.Environment.NewLine + "  Length  ",
+               "Копирование спецификации",
+                thisAssemblyPath,
+                "SeverMineralsCommon.MainSCopy");
+            PushButton pb1 = ribbonPanel.AddItem(b1Data) as PushButton;
+            pb1.ToolTip = "Скопировать спецификацию";
+            BitmapImage pb1Image = new BitmapImage(new Uri("pack://application:,,,/SeverMineralsCommon;component/Resources/SPF_icon.png"));
+            pb1.LargeImage = pb1Image;
+        }
+        //Команда по копированию спецификаций
         static void AddButtonToRibbonPanelSPF(UIControlledApplication application)
         {
             String tabName = "Sever Minerals";
@@ -116,6 +137,7 @@ namespace SeverMineralsCommon
             }
             AddButtonToRibbonPanelIsolate(application);
             AddButtonToRibbonPanelSPF(application);
+            AddButtonToRibbonPanelSCopy(application);
 
             return Result.Succeeded;
         }
