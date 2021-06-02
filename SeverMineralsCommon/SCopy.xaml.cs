@@ -49,9 +49,9 @@ namespace SeverMineralsCommon
 
             //пробуем найти выбранную спецификацию
             View selectedSpec = document.ActiveView;
-            
+
             string selectedSpecType = selectedSpec.GetType().Name;
-                
+
             if (selectedSpecType == "ViewSchedule")
             {
                 this.ViewShedules.Items.Add(selectedSpec.Name);
@@ -72,7 +72,7 @@ namespace SeverMineralsCommon
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            string  SpecToCopyName = this.ViewShedules.SelectedItem.ToString();
+            string SpecToCopyName = this.ViewShedules.SelectedItem.ToString();
             SMViewSchedule viewShedule = new SMViewSchedule(document);
             Dictionary<string, View> allViewSchedulles = viewShedule.GetAllViewScheduleNameView();
             allViewSchedulles.TryGetValue(SpecToCopyName, out View specToCopyView);
@@ -80,20 +80,37 @@ namespace SeverMineralsCommon
             {
                 t.Start();
                 ViewSchedule currentNewSpec = document.GetElement(specToCopyView.Duplicate(ViewDuplicateOption.Duplicate)) as ViewSchedule;
-                currentNewSpec.Name = specToCopyView.Name+"1";
-                ICollection<ElementId> allFilters = currentNewSpec.GetFilters();
-                foreach (var item in allFilters)
+                currentNewSpec.Name = specToCopyView.Name + "1";
+                ScheduleFilter sFilter = currentNewSpec.Definition.GetFilter(0);
+                var sValue = currentNewSpec.Definition.GetFilters();
+                foreach (ScheduleFilter item in sValue)
                 {
-                    MessageBox.Show(item.ToString());
+                    if (item.FilterType == ScheduleFilterType.Equal)
+                    {
+                        MessageBox.Show(item.GetStringValue());
+                    }
+
                 }
+                var testValue = sFilter.FilterType;
+                var testValue01 = sFilter.FieldId;
+                var testValue02 = sFilter.GetStringValue();
+
+
+                //MessageBox.Show(testValue02);
+                //ICollection<ElementId> allFilters = currentNewSpec.GetFilters();
+                //foreach (var item in allFilters)
+                //{
+                //    MessageBox.Show(item.ToString());
+                //}
 
 
 
                 t.Commit();
             }
-               
+
             //Ищем ведомость по имени
 
         }
+        
     }
 }
