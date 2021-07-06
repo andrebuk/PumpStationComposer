@@ -112,7 +112,7 @@ namespace SeverMineralsCommon
                // "Total" + System.Environment.NewLine + "  Length  ",
                "Общие",
                 thisAssemblyPath,
-                "CommonCommands.MainSPF");
+                "SeverMineralsCommon.MainSPF");
             PushButton pb1 = ribbonPanel.AddItem(b1Data) as PushButton;
             pb1.ToolTip = "Изолировать выбранный объект";
             BitmapImage pb1Image = new BitmapImage(new Uri("pack://application:,,,/SeverMineralsCommon;component/Resources/SPF_icon.png"));

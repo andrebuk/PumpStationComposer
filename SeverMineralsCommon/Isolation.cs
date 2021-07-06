@@ -7,7 +7,7 @@ using Autodesk.Revit.UI;
 using Autodesk.Revit.DB;
 using Autodesk.Revit.Attributes;
 
-namespace CommonCommands
+namespace SeverMineralsCommon
 {
     [Transaction(TransactionMode.Manual)]
     class Isolation : IExternalCommand
